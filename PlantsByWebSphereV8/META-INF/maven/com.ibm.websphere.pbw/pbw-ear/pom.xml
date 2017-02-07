@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ibm.websphere.pbw</groupId>
+  <artifactId>pbw-ear</artifactId>
+  <packaging>ear</packaging>
+  <version>8.0</version>
+
+  <name>pbw-ear JavaEE6 Assembly</name>
+
+  <parent>
+    <groupId>com.ibm.websphere.pbw</groupId>
+    <artifactId>pbw-sample</artifactId>
+    <version>8.0</version>
+  </parent>
+
+  <dependencies>
+        <dependency>
+            <groupId>com.ibm.websphere.pbw</groupId>
+            <artifactId>pbw-lib</artifactId>
+            <version>8.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ibm.websphere.pbw</groupId>
+            <artifactId>PlantsByWebSphere</artifactId>
+            <version>8.0</version>
+            <type>war</type>
+        </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>pbw-ear</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-ear-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+            <version>6</version>
+            <generateApplicationXml>false</generateApplicationXml>
+            <modules>
+              <jarModule>
+                <groupId>com.ibm.websphere.pbw</groupId>
+                <artifactId>pbw-lib</artifactId>
+                <!-- force a lib directory location -->
+                <uri>lib/pbw-lib.jar</uri>
+              </jarModule>
+              <webModule>
+                <groupId>com.ibm.websphere.pbw</groupId>
+                <artifactId>PlantsByWebSphere</artifactId>
+                <uri>PlantsByWebSphere.war</uri>
+              </webModule>
+            </modules>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

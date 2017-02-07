@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibm.websphere.pbw</groupId>
+	<artifactId>pbw-lib</artifactId>
+	<packaging>jar</packaging>
+	<version>8.0</version>
+	<name>pbw-lib</name>
+
+	<parent>
+		<groupId>com.ibm.websphere.pbw</groupId>
+		<artifactId>pbw-sample</artifactId>
+		<version>8.0</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ibm.websphere</groupId>
+			<artifactId>java-ee-apis</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<finalName>pbw-lib</finalName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
