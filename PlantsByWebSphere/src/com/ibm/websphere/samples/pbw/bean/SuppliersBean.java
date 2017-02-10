@@ -20,7 +20,8 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -31,7 +32,7 @@ import com.ibm.websphere.samples.pbw.utils.Util;
 /**
  * Bean implementation class for Enterprise Bean: Suppliers
  */
-@Dependent
+@SessionScoped
 public class SuppliersBean implements Serializable {
 
 	@PersistenceContext(unitName = "PBW")

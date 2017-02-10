@@ -20,7 +20,8 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.annotation.security.RolesAllowed;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -34,7 +35,7 @@ import com.ibm.websphere.samples.pbw.utils.Util;
  * The BackOrderMgr provides a transactional and secured facade to access back order information.
  * This bean no longer requires an interface as there is one and only one implementation.
  */
-@Dependent
+@SessionScoped
 @RolesAllowed("SampAdmin")
 public class BackOrderMgr implements Serializable {
 	@PersistenceContext(unitName = "PBW")

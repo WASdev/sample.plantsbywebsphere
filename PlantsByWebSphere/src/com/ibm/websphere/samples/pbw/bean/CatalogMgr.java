@@ -19,7 +19,8 @@ package com.ibm.websphere.samples.pbw.bean;
 import java.io.Serializable;
 import java.util.Vector;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
@@ -33,7 +34,7 @@ import com.ibm.websphere.samples.pbw.jpa.Inventory;
  * 
  * @see com.ibm.websphere.samples.pbw.jpa.Inventory
  */
-@Dependent
+@SessionScoped
 @SuppressWarnings("unchecked")
 public class CatalogMgr implements Serializable {
 	@PersistenceContext(unitName = "PBW")

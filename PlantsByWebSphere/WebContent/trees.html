@@ -25,7 +25,7 @@
 
 </head>
 
-<body onload="configPage('index');">
+<body onload="configPage('trees');">
 
   <!-- Navigation -->
   <nav class="navbar-custom navbar-inverse navbar-fixed-top" role="navigation">
@@ -42,7 +42,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li>
-            <a href="#">Home</a>
+            <a href="index.html">Home</a>
           </li>
           <li>
             <a href="about.html">About</a>
@@ -68,37 +68,46 @@
         <div class="list-group">
           <a href="flowers.html" class="list-group-item">Flowers</a>
           <a href="fruits.html" class="list-group-item">Fruits and Vegetables</a>
-          <a href="trees.html" class="list-group-item">Trees</a>
+          <a href="#" class="list-group-item">Trees</a>
           <a href="accessories.html" class="list-group-item">Accessories</a>
         </div>
       </div>
 
-      <div class="col-md-9" id="productData">
-        <div class="row carousel-holder">
-          <div class="col-md-12">
-            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-              </ol>
-              <div class="carousel-inner">
-                <div class="item active">
-                  <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                </div>
-                <div class="item">
-                  <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                </div>
-                <div class="item">
-                  <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+              <img src="resources/images/trees_ash.jpg" alt="" style="width:320px;height:150px;">
+              <div class="caption">
+                <h4 class="pull-right">$19.99</h4>
+                <h4><a href="#">Ash Tree</a>
+                </h4>
+                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
-              <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-              </a>
-              <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-              </a>
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+              <img src="resources/images/trees_aspen.jpg" alt="" style="width:320px;height:150px;">
+              <div class="caption">
+                <h4 class="pull-right">$19.99</h4>
+                <h4><a href="#">Aspen Tree</a>
+                </h4>
+                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+              <img src="resources/images/trees_bonsai.jpg" alt="" style="width:320px;height:150px;">
+              <div class="caption">
+                <h4 class="pull-right">$19.99</h4>
+                <h4><a href="#">Bonsai Tree</a>
+                </h4>
+                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -106,10 +115,10 @@
         <div class="row">
           <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
-              <img src="resources/images/trees_bonsai.jpg" alt="" style="width:320px;height:150px;">
+              <img src="resources/images/trees_crab.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
-                <h4 class="pull-right">$29.99</h4>
-                <h4><a href="#">Bonsai Tree</a>
+                <h4 class="pull-right">$19.99</h4>
+                <h4><a href="#">Crab Tree</a>
                 </h4>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
@@ -118,27 +127,16 @@
 
           <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
-              <img src="resources/images/veggies_strawberries.jpg" alt="" style="width:320px;height:150px;">
+              <img src="resources/images/trees_maple.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
-                <h4 class="pull-right">$3.99</h4>
-                <h4><a href="#">Strawberries</a>
+                <h4 class="pull-right">$19.99</h4>
+                <h4><a href="#">Maple Tree</a>
                 </h4>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
 
-          <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
-              <img src="resources/images/flower_tulips.jpg" alt="" style="width:320px;height:150px;">
-              <div class="caption">
-                <h4 class="pull-right">$16.99</h4>
-                <h4><a href="#">Tulips</a>
-                </h4>
-                <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -157,4 +155,5 @@
   </div>
 
 </body>
+
 </html>

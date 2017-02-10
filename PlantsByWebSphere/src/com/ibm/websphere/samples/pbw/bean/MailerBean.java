@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.annotation.Resource;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.mail.Message;
 import javax.mail.Multipart;
@@ -44,7 +44,7 @@ import com.ibm.websphere.samples.pbw.utils.Util;
  */
 
 @Named(value = "mailerbean")
-@Dependent
+@SessionScoped
 
 public class MailerBean implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.Vector;
 
 import javax.annotation.security.RolesAllowed;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -42,7 +42,7 @@ import com.ibm.websphere.samples.pbw.utils.Util;
  */
 
 @Named(value = "resetbean")
-@Dependent
+@SessionScoped
 @RolesAllowed("SampAdmin")
 public class ResetDBBean implements Serializable {
 

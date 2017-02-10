@@ -10,7 +10,7 @@ Updated Plants By WebSphere showcase sample to run on WebSphere Liberty.
  Samuel Ivanecky
  Alex Mortimer
 	
- This repo contains the current working version of the PlantsByWebSphere sample.
+ This repo contains a non-working version of the PlantsByWebSphere sample that is currently being developed.  The master branch contains the working version of PlantsByWebSphere.
  Additionally this new version supports the use of the javaMail-1.5 feature which requires the configuration of a mailSession
  object in the server.xml.  Below is an example mailSession configuration.  Make sure to modify the the mail account (Gmail, Yahoo, etc.) settings and allow access of less secure applications in order for it to connect with PlantsByWebSphere.
 

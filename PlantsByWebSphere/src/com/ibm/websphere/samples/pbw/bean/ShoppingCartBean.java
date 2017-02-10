@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
