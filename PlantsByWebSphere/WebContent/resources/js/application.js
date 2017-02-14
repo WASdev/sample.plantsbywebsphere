@@ -35,6 +35,15 @@ function renderShoppingCart(data) {
   }
 }
 
+function addItemToCart(itemID) {
+	$.ajax({
+		type: "POST",
+		url: rootURL + "/cart" + "/" + itemID,
+		dataType: "json",
+		success: configPage
+	})
+}
+
 /* ------------ Product Data ------------ */
 
 // Request list of products
