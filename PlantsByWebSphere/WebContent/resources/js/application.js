@@ -4,6 +4,9 @@ var rootURL = "http://localhost:9080/PlantsByWebSphere/rest";
 // Configure page runs each time a page loads
 function configPage(page) {
   console.log("configuring page");
+  if(page === "shoppingcart") {
+    requestCartItems();
+  }
   getShoppingCart();
 }
 
@@ -40,8 +43,53 @@ function addItemToCart(itemID) {
 		type: "POST",
 		url: rootURL + "/cart" + "/" + itemID,
 		dataType: "json",
-		success: configPage
+		success: getShoppingCart
 	})
+}
+
+// Get shopping cart items
+function requestCartItems() {
+    $.ajax({
+        type: 'GET',
+        url: rootURL + "/items",
+        dataType: "json",
+        success: loadCartItems
+    });
+}
+
+// Load items for the shopping cart page
+function loadCartItems(data) {
+  htmlString = "<div class='row'> <div class='col-lg-12'>";
+  if(data === null) {
+    // handle null result
+  } else {
+    // if item list is empty, do nothing
+    if(data.length === 0) {
+      return;
+    } else {
+      var i;
+
+      // loop through list of items
+      for(i = data.length; i >= 0; i--) {
+        // 3 items per row
+        if((i+3) % 3 === 0) {
+          htmlString+= "<div class='row'>";
+        }
+        htmlString+= "<div class='col-sm-4 col-lg-4 col-md-4'><div class='thumbnail'>" +
+          "<img src='resources/images/" + data[i] + ".jpg' style='width:320px;height:150px;'>" +
+          "<div class='caption'><h4 class='pull-right'>$19.99</h4>" +
+          "<h4><a href='#'>" + data[i] + "</a></h4>" +
+          "<p>This is a short description.</p></div></div></div>";
+
+        // end row
+        if((i+3) % 3 === 2) {
+          htmlString+= "</div>";
+        }
+      }
+
+    }
+    $("#cartItems").html(htmlString);
+  }
 }
 
 /* ------------ Product Data ------------ */
