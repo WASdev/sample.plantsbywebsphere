@@ -1,4 +1,6 @@
 package com.ibm.websphere.samples.pbw.bean;
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,7 +20,13 @@ public class ShoppingCartResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public int getShoppingCartSize() {
-		return cart.getSize(); // needs to be changed to get actual number from shopping cart bean
+		return cart.getSize();
+	}
+	
+	@GET @Path("/items")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Inventory> getShoppingCartItems() {
+		return cart.getItems();
 	}
 	
 	@POST

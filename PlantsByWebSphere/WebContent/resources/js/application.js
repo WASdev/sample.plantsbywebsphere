@@ -38,6 +38,7 @@ function renderShoppingCart(data) {
   }
 }
 
+// Add an item to the shopping cart
 function addItemToCart(itemID) {
 	$.ajax({
 		type: "POST",
@@ -51,7 +52,7 @@ function addItemToCart(itemID) {
 function requestCartItems() {
     $.ajax({
         type: 'GET',
-        url: rootURL + "/items",
+        url: rootURL + "/cart/items",
         dataType: "json",
         success: loadCartItems
     });
@@ -70,19 +71,20 @@ function loadCartItems(data) {
       var i;
 
       // loop through list of items
-      for(i = data.length; i >= 0; i--) {
+      for(i = 0; i < data.length; i++) {
+    	  
         // 3 items per row
-        if((i+3) % 3 === 0) {
+        if(i % 3 === 0) {
           htmlString+= "<div class='row'>";
         }
         htmlString+= "<div class='col-sm-4 col-lg-4 col-md-4'><div class='thumbnail'>" +
-          "<img src='resources/images/" + data[i] + ".jpg' style='width:320px;height:150px;'>" +
+          "<img src='resources/images/" + data[i].name + ".jpg' style='width:320px;height:150px;'>" +
           "<div class='caption'><h4 class='pull-right'>$19.99</h4>" +
-          "<h4><a href='#'>" + data[i] + "</a></h4>" +
-          "<p>This is a short description.</p></div></div></div>";
+          "<h4><a href='#'>" + data[i].name + "</a></h4>" +
+          "<p>" + data[i].description + "</p></div></div></div>";
 
         // end row
-        if((i+3) % 3 === 2) {
+        if(i % 3 === 2) {
           htmlString+= "</div>";
         }
       }
