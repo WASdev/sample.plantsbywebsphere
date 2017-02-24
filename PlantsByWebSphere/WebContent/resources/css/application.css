@@ -53,3 +53,7 @@ All Rights Reserved * Licensed Materials - Property of IBM
 .shopping-cart {
   text-align: right;
 }
+
+table {
+  width:100%;
+}

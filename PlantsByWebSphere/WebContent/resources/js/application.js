@@ -1,5 +1,6 @@
 var shoppingCartString = "Shopping Cart is Empty";
 var rootURL = "http://localhost:9080/PlantsByWebSphere/rest";
+var priceArray = [];
 
 // Configure page runs each time a page loads
 function configPage(page) {
@@ -60,7 +61,16 @@ function requestCartItems() {
 
 // Load items for the shopping cart page
 function loadCartItems(data) {
-  htmlString = "<div class='row'> <div class='col-lg-12'>";
+	console.log(data);
+  var htmlString = "<table class='table-striped'>" +
+    "<thead><tr><th class='col-sm-4'>Plant</th>" +
+    "<th class='col-sm-4'>Quantity</th>" +
+    "<th class='col-sm-4'>Price</th>" +
+    "</tr></thead><tbody>";
+
+  // clear price array
+  priceArray = [];
+
   if(data === null) {
     // handle null result
   } else {
@@ -68,30 +78,45 @@ function loadCartItems(data) {
     if(data.length === 0) {
       return;
     } else {
-      var i;
 
       // loop through list of items
-      for(i = 0; i < data.length; i++) {
-    	  
-        // 3 items per row
-        if(i % 3 === 0) {
-          htmlString+= "<div class='row'>";
-        }
-        htmlString+= "<div class='col-sm-4 col-lg-4 col-md-4'><div class='thumbnail'>" +
-          "<img src='resources/images/" + data[i].name + ".jpg' style='width:320px;height:150px;'>" +
-          "<div class='caption'><h4 class='pull-right'>$19.99</h4>" +
-          "<h4><a href='#'>" + data[i].name + "</a></h4>" +
-          "<p>" + data[i].description + "</p></div></div></div>";
+      for(var i = 0; i < data.length; i++) {
 
-        // end row
-        if(i % 3 === 2) {
-          htmlString+= "</div>";
-        }
+        // add table row
+        htmlString+= "<tr><td>" + data[i].name + "</td>" +
+        "<td><input type='text' onChange='updateTotal();' class='quantity' value=" + data[i].quantity + "></td>" +
+        "<td>$" + data[i].price + "</td></tr>";
+
+        // need prices to calculate total
+        priceArray[i] = data[i].price;
       }
+
+      htmlString+= "</tbody></table><hr><div class='col-lg-8'></div>" +
+        "<div class='col-lg-4'><h5 id='total'> Total: </h5></div>" +
+        "<div class='col-lg-8'></div><div class='col-lg-4'>" +
+        "<button type='button' onclick='doCheckout()'>Checkout</button></div>";
 
     }
     $("#cartItems").html(htmlString);
+    updateTotal();
   }
+}
+
+// Update cart total
+function updateTotal() {
+  var arr = $(".quantity").toArray();
+  var total = 0;
+  for(var i = 0; i < arr.length; i++) {
+    if(parseInt(arr[i].value)) {
+      total += parseInt(arr[i].value)*priceArray[i];
+    }
+  }
+
+  $("#total").html("Total: $" + total);
+}
+
+function doCheckout() {
+  // not yet implemented
 }
 
 /* ------------ Product Data ------------ */
