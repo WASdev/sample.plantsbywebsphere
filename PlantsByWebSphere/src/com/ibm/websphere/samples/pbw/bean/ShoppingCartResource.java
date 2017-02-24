@@ -16,6 +16,8 @@ public class ShoppingCartResource {
 
 	@Inject
 	private ShoppingCartBean cart;
+	@Inject
+	private CatalogMgr catalog;
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -32,7 +34,13 @@ public class ShoppingCartResource {
 	@POST
 	@Path("{id}")
 	public void addItemToCart(@PathParam("id") String id) {
-		cart.addItem(new Inventory(id.toString(), "Bonsai Tree", "This is Sam's Bonsai Tree", "Description", "PackageInfo", "imageHere", 30.0f, 30.0f, 100, 1, "Nothing for notes", true));
+		cart.addItem(catalog.getItemInventory(id));
+	}
+	
+	@GET @Path("/productinfo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Inventory getProductInfo(String itemID) {
+		return catalog.getItemInventory(itemID);
 	}
 	
 }

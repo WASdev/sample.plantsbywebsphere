@@ -8,6 +8,9 @@ function configPage(page) {
   if(page === "shoppingcart") {
     requestCartItems();
   }
+  else  if(page == "product"){
+	  showProductInfo();
+  }
   getShoppingCart();
 }
 
@@ -47,6 +50,39 @@ function addItemToCart(itemID) {
 		dataType: "json",
 		success: getShoppingCart
 	})
+}
+
+//Pull up page with product info.
+function showProductInfo() {
+	$.ajax({
+		type: "GET",
+		url: rootURL + "/cart/productinfo",
+		dataType: "json",
+		success: getProductInfo
+	})
+}
+
+//Load the info for selected product.
+function getProductInfo(item){
+	
+	console.log(item);
+	var htmlString = "<table class='table-striped'>" +
+    "<thead><tr><th class='col-sm-4'>Plant</th>" +
+    "<th class='col-sm-4'>Quantity</th>" +
+    "<th class='col-sm-4'>Price</th>" +
+    "</tr></thead><tbody>";
+		  
+	htmlString+= "<tr><td>" + item.name + "</td>" +
+	        "<td><input type='text' onChange='updateTotal();' class='quantity' value=" + item.quantity + "></td>" +
+	        "<td>$" + item.price + "</td></tr>";
+		  
+	htmlString+= "</tbody></table><hr><div class='col-lg-8'></div>" +
+	        "<div class='col-lg-4'><h5 id='total'> Total: </h5></div>" +
+	        "<div class='col-lg-8'></div><div class='col-lg-4'>" +
+	        "<button type='button' onclick='addItemToCart('item.key')'>Add To Cart</button></div>";
+	  
+	$("#productInfo").html(htmlString);
+    
 }
 
 // Get shopping cart items
