@@ -79,8 +79,9 @@
               <img src="resources/images/accessories_birdfeeder.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Birdfeeder</a>
+                <h4><a id="birdfeederLink" data-toggle="modal" data-target="#productInfo">Birdfeeder</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0002'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -91,8 +92,9 @@
               <img src="resources/images/accessories_birdhouse.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Birdhouse</a>
+                <h4><a id="birdhouseLink" data-toggle="modal" data-target="#productInfo">Birdhouse</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0003'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -103,8 +105,9 @@
               <img src="resources/images/accessories_bulbdigger.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Bulbdigger</a>
+                <h4><a id="bulbdiggerLink" data-toggle="modal" data-target="#productInfo">Bulbdigger</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0001'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -117,8 +120,9 @@
               <img src="resources/images/accessories_finchfood.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Finch Food</a>
+                <h4><a id="finchfoodLink" data-toggle="modal" data-target="#productInfo">Finch Food</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0004'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -129,8 +133,9 @@
               <img src="resources/images/accessories_gloves.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Gloves</a>
+                <h4><a id="glovesLink" data-toggle="modal" data-target="#productInfo">Gloves</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0008'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -141,73 +146,99 @@
               <img src="resources/images/accessories_grassrake.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Grass Rake</a>
+                <h4><a id="grassrakeLink" data-toggle="modal" data-target="#productInfo">Grass Rake</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0005'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
               <img src="resources/images/accessories_handrake.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Hand Rake</a>
+                <h4><a id="handrakeLink" data-toggle="modal" data-target="#productInfo">Hand Rake</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0009'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
               <img src="resources/images/accessories_leafrake.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Leaf Rake</a>
+                <h4><a id="leafrakeLink" data-toggle="modal" data-target="#productInfo">Leaf Rake</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0006'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
               <img src="resources/images/accessories_pot.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Pot</a>
+                <h4><a id="potLink" data-toggle="modal" data-target="#productInfo">Pot</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0010'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
               <img src="resources/images/accessories_shovel.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Shovel</a>
+                <h4><a id="shovelLink" data-toggle="modal" data-target="#productInfo">Shovel</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0007'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
               <img src="resources/images/accessories_wheelbarrow.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Wheelbarrow</a>
+                <h4><a id="wheelbarrowLink" data-toggle="modal" data-target="#productInfo">Wheelbarrow</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('A0011'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
-          
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="productInfo" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="product-title">Loading</h4>
+          </div>
+          <div class="modal-body" id="product-description">
+            <p>Loading product data.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>

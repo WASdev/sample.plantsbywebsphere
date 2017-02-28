@@ -80,8 +80,9 @@
               <img src="resources/images/trees_ash.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Ash Tree</a>
+                <h4><a id="ashLink" data-toggle="modal" data-target="#productInfo">Ash Tree</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('T0001'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -92,8 +93,9 @@
               <img src="resources/images/trees_aspen.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Aspen Tree</a>
+                <h4><a id="aspenLink" data-toggle="modal" data-target="#productInfo">Aspen Tree</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('T0002'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -104,8 +106,9 @@
               <img src="resources/images/trees_bonsai.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Bonsai Tree</a>
+                <h4><a id="bonsaiLink" data-toggle="modal" data-target="#productInfo">Bonsai Tree</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('T0003'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -118,8 +121,9 @@
               <img src="resources/images/trees_crab.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Crab Tree</a>
+                <h4><a id="crabLink" data-toggle="modal" data-target="#productInfo">Crab Tree</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('T0004'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -130,13 +134,33 @@
               <img src="resources/images/trees_maple.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Maple Tree</a>
+                <h4><a id="mapleLink" data-toggle="modal" data-target="#productInfo">Maple Tree</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('T0005'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="productInfo" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="product-title">Loading</h4>
+          </div>
+          <div class="modal-body" id="product-description">
+            <p>Loading product data.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>

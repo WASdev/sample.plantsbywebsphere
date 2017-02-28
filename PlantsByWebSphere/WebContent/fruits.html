@@ -79,8 +79,9 @@
               <img src="resources/images/veggies_cabbage.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Cabbage</a>
+                <h4><a id="cabbageLink" data-toggle="modal" data-target="#productInfo">Cabbage</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('V0001'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -91,8 +92,9 @@
               <img src="resources/images/veggies_gourds.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Gourds</a>
+                <h4><a id="gourdsLink" data-toggle="modal" data-target="#productInfo">Gourds</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('V0002'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -103,8 +105,9 @@
               <img src="resources/images/veggies_grapes.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Grapes</a>
+                <h4><a id="grapesLink" data-toggle="modal" data-target="#productInfo">Grapes</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('V0003'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -117,8 +120,9 @@
               <img src="resources/images/veggies_onion.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Onion</a>
+                <h4><a id="onionLink" data-toggle="modal" data-target="#productInfo">Onion</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('V0004'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -129,8 +133,9 @@
               <img src="resources/images/veggies_pineapple.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Pineapple</a>
+                <h4><a id="pineappleLink" data-toggle="modal" data-target="#productInfo">Pineapple</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('V0005'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
@@ -141,25 +146,46 @@
               <img src="resources/images/veggies_strawberries.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Strawberries</a>
+                <h4><a id="strawberryLink" data-toggle="modal" data-target="#productInfo">Strawberries</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('V0006'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-4 col-lg-4 col-md-4">
             <div class="thumbnail">
               <img src="resources/images/veggies_watermelon.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$19.99</h4>
-                <h4><a href="#">Watermelon</a>
+                <h4><a id="watermelonLink" data-toggle="modal" data-target="#productInfo">Watermelon</a>
                 </h4>
+                <input type="button" onclick="addItemToCart('V0007'); configPage('index');" value="Add To Cart"/>
                 <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </div>
             </div>
           </div>
-          
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="productInfo" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="product-title">Loading</h4>
+          </div>
+          <div class="modal-body" id="product-description">
+            <p>Loading product data.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>

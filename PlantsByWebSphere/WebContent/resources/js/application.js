@@ -7,6 +7,14 @@ function configPage(page) {
   console.log("configuring page");
   if (page === "index") {
     configIndex();
+  } else if (page === "accessories") {
+    configAccessories();
+  } else if (page === "flowers") {
+    configFlowers();
+  } else if (page === "fruits") {
+    configFruits();
+  } else if (page === "trees") {
+    configTrees();
   } else if (page === "shoppingcart") {
     requestCartItems();
   }
@@ -17,16 +25,69 @@ function configPage(page) {
 
 // Configure the links on the index page
 function configIndex() {
-  console.log("setting up links");
-  $("#bonsaiLink").click(function(){
-    getProductInfo("T0003");
-  });
-  $("#strawberryLink").click(function(){
-    getProductInfo("V0006");
-  });
-  $("#tulipsLink").click(function(){
-    getProductInfo("F0017");
-  });
+  console.log("Setting up links");
+  $("#bonsaiLink").click(function(){getProductInfo("T0003");});
+  $("#strawberryLink").click(function(){getProductInfo("V0006");});
+  $("#tulipsLink").click(function(){getProductInfo("F0017");});
+}
+
+function configAccessories() {
+  console.log("Setting up links");
+  $("#birdfeederLink").click(function(){getProductInfo("A0002");});
+  $("#birdhouseLink").click(function(){getProductInfo("A0003");});
+  $("#bulbdiggerLink").click(function(){getProductInfo("A0001");});
+  $("#finchfoodLink").click(function(){getProductInfo("A0004");});
+  $("#glovesLink").click(function(){getProductInfo("A0008");});
+  $("#grassrakeLink").click(function(){getProductInfo("A0005");});
+  $("#handrakeLink").click(function(){getProductInfo("A0009");});
+  $("#leafrakeLink").click(function(){getProductInfo("A0006");});
+  $("#potLink").click(function(){getProductInfo("A0010");});
+  $("#shovelLink").click(function(){getProductInfo("A0007");});
+  $("#wheelbarrowLink").click(function(){getProductInfo("A0011");});
+}
+
+function configFlowers() {
+  console.log("Setting up links");
+  $("#africanorchidLink").click(function(){getProductInfo("F0001");});
+  $("#breathflowerLink").click(function(){getProductInfo("F0002");});
+  $("#blackeyedsusanLink").click(function(){getProductInfo("F0003");});
+  $("#coleusLink").click(function(){getProductInfo("F0004");});
+  $("#daisiesLink").click(function(){getProductInfo("F0005");});
+  $("#foxgloveLink").click(function(){getProductInfo("F0006");});
+  $("#geraniumLink").click(function(){getProductInfo("F0007");});
+  $("#goodnightmoonLink").click(function(){getProductInfo("F0008");});
+  $("#impatiensLink").click(function(){getProductInfo("F0009");});
+  $("#lilyLink").click(function(){getProductInfo("F0010");});
+  $("#pansiesLink").click(function(){getProductInfo("F0011");});
+  $("#petuniasLink").click(function(){getProductInfo("F0012");});
+  $("#primroseLink").click(function(){getProductInfo("F0013");});
+  $("#redpoinsettiaLink").click(function(){getProductInfo("F0014");});
+  $("#redroseLink").click(function(){getProductInfo("F0015");});
+  $("#sparklercelosiaLink").click(function(){getProductInfo("F0016");});
+  $("#tulipsLink").click(function(){getProductInfo("F0017");});
+  $("#whitepoinsettiaLink").click(function(){getProductInfo("F0018");});
+  $("#whiteroseLink").click(function(){getProductInfo("F0019");});
+  $("#zinniaLink").click(function(){getProductInfo("F0020");});
+}
+
+function configFruits() {
+  console.log("Setting up links");
+  $("#cabbageLink").click(function(){getProductInfo("V0001");});
+  $("#gourdsLink").click(function(){getProductInfo("V0002");});
+  $("#grapesLink").click(function(){getProductInfo("V0003");});
+  $("#onionLink").click(function(){getProductInfo("V0004");});
+  $("#pineappleLink").click(function(){getProductInfo("V0005");});
+  $("#strawberryLink").click(function(){getProductInfo("V0006");});
+  $("#watermelonLink").click(function(){getProductInfo("V0007");});
+}
+
+function configTrees() {
+  console.log("Setting up links");
+  $("#ashLink").click(function(){getProductInfo("T0001");});
+  $("#aspenLink").click(function(){getProductInfo("T0002");});
+  $("#bonsaiLink").click(function(){getProductInfo("T0003");});
+  $("#crabLink").click(function(){getProductInfo("T0004");});
+  $("#mapleLink").click(function(){getProductInfo("T0005");});
 }
 
 /* ------------ Shopping Cart ------------ */
