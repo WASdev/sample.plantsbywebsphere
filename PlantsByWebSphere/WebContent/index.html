@@ -62,7 +62,6 @@
   <!-- Page Content -->
   <div class="container">
     <div class="row">
-
       <div class="col-md-3">
         <p class="lead">Gardens of Summer</p>
         <div class="list-group">
@@ -109,9 +108,9 @@
               <img src="resources/images/trees_bonsai.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$29.99</h4>
-                <h4><a href="product.html">Bonsai Tree</a>
+                <h4><a id="bonsaiLink" data-toggle="modal" data-target="#productInfo">Bonsai Tree</a>
                 </h4>
-                	<input type="button" onclick="addItemToCart('T0003'); configPage('index');" value="Add To Cart"/>
+                <input type="button" onclick="addItemToCart('T0003'); configPage('index');" value="Add To Cart"/>
                 <p>Bonsais are great miniature replicas of your favorite yard tree. They can be indoors or out.</p>
               </div>
             </div>
@@ -122,9 +121,9 @@
               <img src="resources/images/veggies_strawberries.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$3.99</h4>
-                <h4><a href="#">Strawberries</a>
+                <h4><a id="strawberryLink" data-toggle="modal" data-target="#productInfo">Strawberries</a>
                 </h4>
-                <input type="button" onclick="addItemToCart('V0006')" value="Add To Cart"/>
+                <input type="button" onclick="addItemToCart('V0006'); configPage('index');" value="Add To Cart"/>
                 <p>Our brand is known for producing plump, sweet strawberries by the mid-June bucketful.</p>
               </div>
             </div>
@@ -135,9 +134,8 @@
               <img src="resources/images/flower_tulips.jpg" alt="" style="width:320px;height:150px;">
               <div class="caption">
                 <h4 class="pull-right">$16.99</h4>
-                <h4><a href="#">Tulips</a>
-                </h4>
-               <input type="button" onclick="addItemToCart('F0017')" value="Add To Cart"/>
+                <h4><a id ="tulipsLink" data-toggle="modal" data-target="#productInfo">Tulips</a></h4>
+                <input type="button" onclick="addItemToCart('F0017'); configPage('index');" value="Add To Cart"/>
                 <p>Our famous tulip bulbs are supplied by one of the finest Dutch bulb growers.</p>
               </div>
             </div>
@@ -145,6 +143,27 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="productInfo" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="product-title">Loading</h4>
+          </div>
+          <div class="modal-body" id="product-description">
+            <p>Loading product data.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- Footer -->

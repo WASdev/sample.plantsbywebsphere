@@ -37,10 +37,10 @@ public class ShoppingCartResource {
 		cart.addItem(catalog.getItemInventory(id));
 	}
 	
-	@GET @Path("/productinfo")
+	@GET @Path("/productinfo/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Inventory getProductInfo(String itemID) {
-		return catalog.getItemInventory(itemID);
+	public Inventory getProductInfo(@PathParam("id") String id) {
+		return catalog.getItemInventory(id);
 	}
 	
 }
