@@ -71,7 +71,7 @@ All Rights Reserved * Licensed Materials - Property of IBM
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
           <li><a href="shoppingcart.html"><span class="glyphicon glyphicon-shopping-cart"></span> <span id="cart">Shopping Cart is Empty</span></a></li>
         </ul>
       </div>
@@ -81,12 +81,12 @@ All Rights Reserved * Licensed Materials - Property of IBM
   <!-- Page Content -->
   <div class="container">
 
-    <form class="form-signin">
+    <form name="login" class="form-signin" form action="rest/cart/login" method="post">
       <h2 class="form-signin-heading">Please sign in</h2>
       <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
       <div class="checkbox">
         <label>
           <input type="checkbox" value="remember-me"> Remember me

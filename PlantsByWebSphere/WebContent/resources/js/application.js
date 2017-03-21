@@ -1,5 +1,6 @@
 var shoppingCartString = "Shopping Cart is Empty";
 var rootURL = "http://localhost:9080/PlantsByWebSphere/rest";
+var signedIn = false;
 var priceArray = [];
 
 // Configure page runs each time a page loads
@@ -18,6 +19,7 @@ function configPage(page) {
   } else if (page === "shoppingcart") {
     requestCartItems();
   }
+  getStatus();
   getShoppingCart();
 }
 
@@ -90,6 +92,32 @@ function configTrees() {
   $("#mapleLink").click(function(){getProductInfo("T0005");});
 }
 
+/* ------------ Login ------------ */
+
+// Get login status
+function getStatus() {
+  console.log("Checking for login");
+  $.ajax({
+    type: 'GET',
+    url: rootURL + "/cart/status",
+    dataType: "json",
+    success: renderStatus
+  });
+}
+
+// Update login status
+function renderStatus(data) {
+  if(data === null) {
+    console.log("Server returned null data");
+  } else if(data === "nope") {
+    console.log("User is not logged in");
+  } else {
+    console.log(data);
+    $("#login").text(data);
+    $("#login").attr("href", "#");
+  }
+}
+
 /* ------------ Shopping Cart ------------ */
 
 // Get number of items in shopping cart
@@ -124,7 +152,7 @@ function addItemToCart(itemID) {
   console.log("Adding item to shopping cart with id: " + itemID);
   $.ajax({
     type: "POST",
-    url: rootURL + "/cart" + "/" + itemID,
+    url: rootURL + "/cart/" + itemID,
     dataType: "json",
     success: getShoppingCart
   })
@@ -204,7 +232,12 @@ function updateTotal() {
 /* ------------ Checkout ------------ */
 
 function doCheckout() {
-  // not yet implemented
+  if(signedIn) {
+    console.log("user is logged in");
+    // now redirect to checkout page
+  } else {
+    window.location.href = "login.html";
+  }
 }
 
 /* ------------ Product Data ------------ */
