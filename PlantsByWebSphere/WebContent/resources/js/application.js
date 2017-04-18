@@ -1,4 +1,5 @@
 var shoppingCartString = "Shopping Cart is Empty";
+var shoppingCartData = null;
 var rootURL = "http://localhost:9080/PlantsByWebSphere/rest";
 var signedIn = false;
 var priceArray = [];
@@ -33,6 +34,7 @@ function configIndex() {
   $("#tulipsLink").click(function(){getProductInfo("F0017");});
 }
 
+// Configure the links on the accessories page
 function configAccessories() {
   console.log("Setting up links");
   $("#birdfeederLink").click(function(){getProductInfo("A0002");});
@@ -48,6 +50,7 @@ function configAccessories() {
   $("#wheelbarrowLink").click(function(){getProductInfo("A0011");});
 }
 
+// Configure the links on the flowers page
 function configFlowers() {
   console.log("Setting up links");
   $("#africanorchidLink").click(function(){getProductInfo("F0001");});
@@ -72,6 +75,7 @@ function configFlowers() {
   $("#zinniaLink").click(function(){getProductInfo("F0020");});
 }
 
+// Configure the links on the fruits page
 function configFruits() {
   console.log("Setting up links");
   $("#cabbageLink").click(function(){getProductInfo("V0001");});
@@ -83,6 +87,7 @@ function configFruits() {
   $("#watermelonLink").click(function(){getProductInfo("V0007");});
 }
 
+// Configure the links on the trees page
 function configTrees() {
   console.log("Setting up links");
   $("#ashLink").click(function(){getProductInfo("T0001");});
@@ -175,6 +180,7 @@ function loadCartItems(data) {
     console.log("Server returned null data");
   } else {
     console.log(data);
+    shoppingCartData = data;
     var htmlString = "<table class='table-striped'>" +
     "<thead><tr><th class='col-sm-4'>Plant</th>" +
     "<th class='col-sm-4'>Quantity</th>" +
@@ -226,7 +232,14 @@ function updateTotal() {
     }
   }
 
+  var jsonString = "{";
+  for (var j = 0; j < shoppingCartData.length; j++) {
+    jsonString+= data[j].id + " : " + parseInt(arr[j].value) + ",";
+  }
+  jsonString+= "};";
+
   $("#total").html("Total: $" + total);
+  return jsonCart;
 }
 
 /* ------------ Checkout ------------ */
@@ -234,7 +247,15 @@ function updateTotal() {
 function doCheckout() {
   if(signedIn) {
     console.log("user is logged in");
-    // now redirect to checkout page
+    var jsonData = updateTotal();
+
+    $.ajax({
+      type: "POST",
+      url: rootURL + "/cart/checkout",
+      dataType: "json",
+      data : jsonData,
+      success: renderProductInfo
+    });
   } else {
     window.location.href = "login.html";
   }
