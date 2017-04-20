@@ -61,10 +61,9 @@
 
   <!-- Page Content -->
   <div class="container">
-
-	
-   
-    <body><h2>
+  
+    <form name="register" class="form-register" form action="rest/cart/register" method="post">
+    <h2>
     Please enter the following information in order to complete the checkout process. 
     
     </h2>
@@ -75,9 +74,9 @@
       <label for="inputLastName" class="sr-only">Last Name</label>
       <input type="nameLast" id="nameLast" class="form-control" placeholder="Last Name" required>
      
-      <h3>
+      <p>
       Billing Information:
-      </h3>
+      </p>
       
        <p>Address:</p>
       <label for="inputBillAddr" class="sr-only">Address</label>
@@ -95,9 +94,9 @@
       <label for="inputPhone" class="sr-only">Phone Number</label>
       <input type="phoneBill" id="phoneBill" class="form-control" placeholder="Phone Number" required>
       
-      <h3>
+      <p>
       Shipping Information:
-      </h3>
+      </p>
       
       <div class="checkbox">
         <label>
@@ -121,9 +120,9 @@
       <label for="inputPhone" class="sr-only">Phone Number</label>
       <input type="phoneShip" id="phoneShip" class="form-control" placeholder="Phone Number" required>
       
-      <h3>
+      <p>
       Credit Card Information:
-      </h3>
+      </p>
       
       <p>Card Name:</p>
       <label for="inputName" class="sr-only">Card Name</label>
@@ -140,7 +139,7 @@
       <p>Cardholder Name:</p>
       <label for="inputHolder" class="sr-only">Cardholder Name</label>
       <input type="cardholderName" id="cardholderName" class="form-control" placeholder="Cardholder Name" required>
-    </body>
+    </form>
   </div>
 
   <!-- Footer -->

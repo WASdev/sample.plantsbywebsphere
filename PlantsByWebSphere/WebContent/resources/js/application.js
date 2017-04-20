@@ -123,6 +123,30 @@ function renderStatus(data) {
   }
 }
 
+
+/*-------------- Register ---------------- */
+// Get customer info
+function creatCustomer() {
+	console.log("Creating new customer");
+	$.ajax({
+		type: 'GET',
+		url: rootURL + "cart/register",
+		dataType: "json",
+		success: renderCustomer
+	});
+}
+// Create new customer
+function renderCustomer(data) {
+	console.log("Rendering new customer");
+	if(data == null)
+		console.log("Server returned null data");
+	else{
+		console.log(data);
+		$("#register").text(data);
+		$("#register").attr("href", "#");
+	}
+}
+
 /* ------------ Shopping Cart ------------ */
 
 // Get number of items in shopping cart

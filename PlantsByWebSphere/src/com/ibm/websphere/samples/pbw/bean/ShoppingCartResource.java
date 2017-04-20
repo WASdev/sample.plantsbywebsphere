@@ -25,6 +25,9 @@ public class ShoppingCartResource {
 	private AccountBean account;
 	@Inject
 	private CatalogMgr catalog;
+	@Inject
+	private CustomerMgr customer;
+	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -66,7 +69,7 @@ public class ShoppingCartResource {
 		
 		// always redirect to checkout page
 		java.net.URI location;
-		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/checkout.html");
+		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/register.html");
 		System.out.println("Redirecting to " + location);
 		return Response.temporaryRedirect(location).build();
 		
@@ -86,6 +89,40 @@ public class ShoppingCartResource {
 		} else {
 			return Response.status(0).build();
 		}*/
+	}
+	
+	@POST
+	@Path("/register")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+	public Response createCustomer(@FormParam("email") String email, @FormParam("passwrord") String password, @FormParam("firstname") String firstName, @FormParam("lastname") String lastName, 
+			@FormParam("address1") String addr1, @FormParam("address2") String addr2,  @FormParam("city") String city, 
+			@FormParam("state") String state, @FormParam("zipCode") String zipCode, @FormParam("phonenum") String phonenum) throws URISyntaxException {
+			
+		
+		account.performRegister();
+		
+		// Updates the empty new Customer object created by performRegister.
+		account.getCustomer().setCustomerID(email);
+		account.getCustomer().setPassword(password);
+		account.getCustomer().setFirstName(firstName);
+		account.getCustomer().setLastName(lastName);
+		account.getCustomer().setAddr1(addr1);
+		account.getCustomer().setAddr2(addr2);
+		account.getCustomer().setAddrCity(city);
+		account.getCustomer().setAddrState(state);
+		account.getCustomer().setAddrZip(zipCode);
+		account.getCustomer().setPhone(phonenum);
+		
+		// Sets the values for the new Customer.
+		account.performAccountUpdate();
+		
+		// Redirects user to checkout page.
+		java.net.URI location;
+		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/checkout.html");
+		System.out.println("Redirecting to " + location);
+		return Response.temporaryRedirect(location).build();
+
 	}
 	
 	@POST
