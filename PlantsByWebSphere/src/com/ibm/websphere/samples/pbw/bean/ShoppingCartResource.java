@@ -25,8 +25,6 @@ public class ShoppingCartResource {
 	private AccountBean account;
 	@Inject
 	private CatalogMgr catalog;
-	@Inject
-	private CustomerMgr customer;
 	
 	
 	@GET
@@ -101,6 +99,8 @@ public class ShoppingCartResource {
 			
 		
 		account.performRegister();
+		account.getLoginInfo().setEmail(email);
+		account.getLoginInfo().setPassword(password);
 		
 		// Updates the empty new Customer object created by performRegister.
 		account.getCustomer().setCustomerID(email);
