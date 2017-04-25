@@ -95,7 +95,7 @@ public class ShoppingCartResource {
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
-	public Response createCustomer(@FormParam("email") String email, @FormParam("passwrord") String password, @FormParam("firstname") String firstName, @FormParam("lastname") String lastName, 
+	public Response createCustomer(@FormParam("email") String email, @FormParam("password") String password, @FormParam("firstname") String firstName, @FormParam("lastname") String lastName, 
 			@FormParam("address1") String addr1, @FormParam("address2") String addr2,  @FormParam("city") String city, 
 			@FormParam("state") String state, @FormParam("zipCode") String zipCode, @FormParam("phonenum") String phonenum) throws URISyntaxException {
 			
@@ -127,14 +127,44 @@ public class ShoppingCartResource {
 	
 	@POST
 	@Path("/checkout")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
-	public boolean performCheckout(String data) {
-		System.out.println(data);
+	public Response createOrder(@FormParam("billName") String billName, @FormParam("billAddr1") String billAddr1, @FormParam("billAddr2") String billAddr2, @FormParam("billCity") String billCity, 
+			@FormParam("billState") String billState, @FormParam("billZip") String billZip,  @FormParam("billPhone") String billPhone, @FormParam("shipName") String shipName, @FormParam("shipAddr1") String shipAddr1, 
+			@FormParam("shipAddr2") String shipAddr2, @FormParam("shipCity") String shipCity, @FormParam("shipState") String shipState, @FormParam("shipZip") String shipZip,  @FormParam("shipPhone") String shipPhone,
+			@FormParam("cardholderName") String cardholderName, @FormParam("cardName") String cardName, @FormParam("cardNum") String cardNum, @FormParam("CardExpMonth") String cardExpMonth, 
+			@FormParam("cardExpYear") String cardExpYear) throws URISyntaxException {
+			
+		// First create a new order.
+		account.performOrderInfo();
+		
+		// Fill in order information - Billing
+		account.getOrderInfo().setBillName(billName);
+		account.getOrderInfo().setBillAddr1(billAddr1);
+		account.getOrderInfo().setBillAddr2(billAddr2);
+		account.getOrderInfo().setBillCity(billCity);
+		account.getOrderInfo().setBillState(billState);
+		account.getOrderInfo().setBillZip(billZip);
+		account.getOrderInfo().setBillPhone(billPhone);
+		// Fill in order information - Shipping
+		account.getOrderInfo().setShipName(shipName);
+		account.getOrderInfo().setShipAddr1(shipAddr1);
+		account.getOrderInfo().setShipAddr2(shipAddr2);
+		account.getOrderInfo().setShipCity(shipCity);
+		account.getOrderInfo().setShipState(shipState);
+		account.getOrderInfo().setShipZip(shipZip);
+		account.getOrderInfo().setShipPhone(shipPhone);
+		
+		
+		
+		// Redirects user to order summary page.
+		java.net.URI location;
+		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/checkout.html");
+		System.out.println("Redirecting to " + location);
+		return Response.temporaryRedirect(location).build();
 
-		// TODO finish checkout process
-		return true;
 	}
+	
 	
 	@POST
 	@Path("{id}")

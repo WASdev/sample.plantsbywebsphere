@@ -147,6 +147,29 @@ function renderCustomer(data) {
 	}
 }
 
+/*-------------- Checkout ---------------- */
+//Get checkout info
+function creatOrder() {
+	console.log("Creating new checkout");
+	$.ajax({
+		type: 'GET',
+		url: rootURL + "cart/checkout",
+		dataType: "json",
+		success: renderCheckout
+	});
+}
+//Create new order
+function renderOrder(data) {
+	console.log("Rendering new order");
+	if(data == null)
+		console.log("Server returned null data");
+	else{
+		console.log(data);
+		$("#checkout").text(data);
+		$("#checkout").attr("href", "#");
+	}
+}
+
 /* ------------ Shopping Cart ------------ */
 
 // Get number of items in shopping cart

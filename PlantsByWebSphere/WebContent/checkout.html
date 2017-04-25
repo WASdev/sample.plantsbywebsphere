@@ -62,37 +62,34 @@
   <!-- Page Content -->
   <div class="container">
   
-    <form name="register" class="form-register" form action="rest/cart/register" method="post">
+    <form name="checkout" class="form-checkout" form action="rest/cart/checkout" method="post">
     <h2>
     Please enter the following information in order to complete the checkout process. 
     
     </h2>
-    <p>First Name:</p>
-    <label for="inputFirstName" class="sr-only">First Name</label>
-      <input type="nameFirst" id="nameFirst" class="form-control" placeholder="First Name" required>
-    <p>Last Name:</p>
-      <label for="inputLastName" class="sr-only">Last Name</label>
-      <input type="nameLast" id="nameLast" class="form-control" placeholder="Last Name" required>
-     
-      <p>
+     <p>
       Billing Information:
       </p>
-      
+    <p>Billing Name:</p>
+    <label for="billName" class="sr-only">Billing Name</label>
+      <input type="billName" id="billName" class="form-control" placeholder="Billing Name" required>      
        <p>Address:</p>
-      <label for="inputBillAddr" class="sr-only">Address</label>
-      <input type="addressBill" id="addressBill" class="form-control" placeholder="Address" required>
+      <label for="billAddr1" class="sr-only">Address 1</label>
+      <input type="billAddr1" id="billAddr1" class="form-control" placeholder="Address 1" required>
+      <label for="billAddr2" class="sr-only">Address 2</label>
+      <input type="billAddr2" id="billAddr2" class="form-control" placeholder="Address 2" required>
        <p>City:</p>
-      <label for="inputCity" class="sr-only">City</label>
-      <input type="cityBill" id="cityBill" class="form-control" placeholder="City" required>
+      <label for="billCity" class="sr-only">City</label>
+      <input type="billCity" id="billCity" class="form-control" placeholder="City" required>
        <p>State:</p>
-      <label for="inputState" class="sr-only">State</label>
-      <input type="stateBill" id="stateBill" class="form-control" placeholder="State" required>
+      <label for="billState" class="sr-only">State</label>
+      <input type="billState" id="billState" class="form-control" placeholder="State" required>
        <p>Zip Code:</p>
-      <label for="inputZip" class="sr-only">Zip Code</label>
-      <input type="zipCodeBill" id="zipCodeBill" class="form-control" placeholder="Zip Code" required>
+      <label for="billZip" class="sr-only">Zip Code</label>
+      <input type="billZip" id="billZip" class="form-control" placeholder="Zip Code" required>
       <p>Phone Number:</p>
-      <label for="inputPhone" class="sr-only">Phone Number</label>
-      <input type="phoneBill" id="phoneBill" class="form-control" placeholder="Phone Number" required>
+      <label for="billPhone" class="sr-only">Phone Number</label>
+      <input type="billPhone" id="billPhone" class="form-control" placeholder="Phone Number" required>
       
       <p>
       Shipping Information:
@@ -103,42 +100,47 @@
           <input type="checkbox" value="same-as-billing"> Same As Billing
         </label>
       </div>
-      
+      <p>Shipping Name:</p>
+       <label for="shipName" class="sr-only">Billing Name</label>
+      <input type="shipName" id="shipName" class="form-control" placeholder="Shipping Name" required>      
        <p>Address:</p>
-      <label for="inputShipAddr" class="sr-only">Address</label>
-      <input type="addressShip" id="addressShip" class="form-control" placeholder="Address" required>
+      <label for="shipAddr1" class="sr-only">Address 1</label>
+      <input type="shipAddr1" id="shipAddr1" class="form-control" placeholder="Address 1" required>
+      <label for="shipAddr2" class="sr-only">Address 2</label>
+      <input type="shipAddr2" id="shipAddr2" class="form-control" placeholder="Address 2" required>
        <p>City:</p>
-      <label for="inputCity" class="sr-only">City</label>
-      <input type="cityShip" id="cityShip" class="form-control" placeholder="City" required>
+      <label for="shipCity" class="sr-only">City</label>
+      <input type="shipCity" id="shipCity" class="form-control" placeholder="City" required>
        <p>State:</p>
-      <label for="inputState" class="sr-only">State</label>
-      <input type="stateShip" id="stateShip" class="form-control" placeholder="State" required>
+      <label for="shipState" class="sr-only">State</label>
+      <input type="shipState" id="shipState" class="form-control" placeholder="State" required>
        <p>Zip Code:</p>
-      <label for="inputZip" class="sr-only">Zip Code</label>
-      <input type="zipCodeShip" id="zipCodeShip" class="form-control" placeholder="Zip Code" required>
+      <label for="shipZip" class="sr-only">Zip Code</label>
+      <input type="shipZip" id="shipZip" class="form-control" placeholder="Zip Code" required>
       <p>Phone Number:</p>
-      <label for="inputPhone" class="sr-only">Phone Number</label>
-      <input type="phoneShip" id="phoneShip" class="form-control" placeholder="Phone Number" required>
+      <label for="shipPhone" class="sr-only">Phone Number</label>
+      <input type="shipPhone" id="shipPhone" class="form-control" placeholder="Phone Number" required>
       
       <p>
       Credit Card Information:
       </p>
       
+      <p>Cardholder Name:</p>
+      <label for="cardholderName" class="sr-only">Cardholder Name</label>
+      <input type="cardholderName" id="cardholderName" class="form-control" placeholder="Cardholder Name" required>
       <p>Card Name:</p>
-      <label for="inputName" class="sr-only">Card Name</label>
+      <label for="cardName" class="sr-only">Card Name</label>
       <input type="cardName" id="cardName" class="form-control" placeholder="Card Name" required>
       <p>Card Number:</p>
-      <label for="inputNum" class="sr-only">Card Number</label>
+      <label for="cardNum" class="sr-only">Card Number</label>
       <input type="cardNum" id="cardNum" class="form-control" placeholder="Card Number" required>
       <p>Expiration Month:</p>
-      <label for="inputMonth" class="sr-only">Exp Month</label>
-      <input type="expMonth" id="expMonth" class="form-control" placeholder="Exp. Month" required>
+      <label for="cardExpMonth" class="sr-only">Exp Month</label>
+      <input type="cardExpMonth" id="cardExpMonth" class="form-control" placeholder="Exp. Month" required>
       <p>Expiration Year:</p>
-      <label for="inputYear" class="sr-only">Exp Year</label>
-      <input type="expYr" id="expYr" class="form-control" placeholder="Exp. Year" required>
-      <p>Cardholder Name:</p>
-      <label for="inputHolder" class="sr-only">Cardholder Name</label>
-      <input type="cardholderName" id="cardholderName" class="form-control" placeholder="Cardholder Name" required>
+      <label for="cardExpYear" class="sr-only">Exp Year</label>
+      <input type="cardExpYear" id="cardExpYear" class="form-control" placeholder="Exp. Year" required>
+       <button class="btn btn-lg btn-primary btn-block" type="submit">Checkout Now</button>
     </form>
   </div>
 
