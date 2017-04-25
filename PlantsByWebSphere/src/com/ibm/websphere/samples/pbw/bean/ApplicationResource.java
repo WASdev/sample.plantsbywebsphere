@@ -13,11 +13,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.ibm.json.java.JSONArray;
+import com.ibm.json.java.JSONObject;
 import com.ibm.websphere.samples.pbw.jpa.Inventory;
 import com.ibm.websphere.samples.pbw.war.AccountBean;
 
-@Path("/cart")
-public class ShoppingCartResource {
+@Path("/app")
+public class ApplicationResource {
 
 	@Inject
 	private ShoppingCartBean cart;
@@ -26,29 +28,50 @@ public class ShoppingCartResource {
 	@Inject
 	private CatalogMgr catalog;
 	
+	/* ---------- SHOPPING CART ---------- */
 	
-	@GET
+	// Client requested number of items in shopping cart
+	@GET @Path("/cart")
 	@Produces(MediaType.APPLICATION_JSON)
 	public int getShoppingCartSize() {
 		return cart.getSize();
 	}
 	
-	@GET @Path("/items")
+	// Client is adding item to shopping cart
+	@POST
+	@Path("/cart/{id}")
+	public void addItemToCart(@PathParam("id") String id) {
+		cart.addItem(catalog.getItemInventory(id));
+	}
+	
+	// Client requested list of items in shopping cart
+	@GET @Path("/cart/items")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Inventory> getShoppingCartItems() {
 		return cart.getItems();
 	}
 	
+	// Client requested info for a product
+	@GET @Path("/productinfo/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Inventory getProductInfo(@PathParam("id") String id) {
+		return catalog.getItemInventory(id);
+	}
+	
+	/* ---------- LOGIN ---------- */
+	
+	// Client requested current login status
 	@GET @Path("/status")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getStatus() {
 		if (account.isRegister()) {
 			return account.getCustomer().getFirstName();
 		} else {
-			return "nope";
+			return "401";
 		}
 	}
 	
+	// Client is trying to login
 	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -61,34 +84,34 @@ public class ShoppingCartResource {
 		account.getLoginInfo().setEmail(email);
 		account.getLoginInfo().setPassword(password);
 		
-		// perform login and check status
+		// perform login
 		String status = account.performLoginComplete();
-		System.out.println("Status = " + status);
-		
-		// always redirect to checkout page
-		java.net.URI location;
-		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/register.html");
-		System.out.println("Redirecting to " + location);
-		return Response.temporaryRedirect(location).build();
-		
-		// TODO once create account works, fix this
 		
 		// check for status and return
-		/*if (status == null) {
+		if (status == null) {
+			
+			// login was successful, now redirect
 			java.net.URI location;
 			
-			try {
-				location = new java.net.URI("checkout.html");
-				return Response.temporaryRedirect(location).build();
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
+			if (cart.getSize() == 0) {
+				location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/");
+			} else {
+				location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/register.html");
 			}
-		    return Response.status(-1).build();
+
+			return Response.temporaryRedirect(location).build();
 		} else {
-			return Response.status(0).build();
-		}*/
+			
+			// login was not successful
+			java.net.URI location;
+			location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/login.html");
+			return Response.temporaryRedirect(location).build();
+		}
 	}
 	
+	/* ---------- REGISTER ---------- */
+	
+	// Client is trying to register new user
 	@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -125,6 +148,22 @@ public class ShoppingCartResource {
 
 	}
 	
+	/* ---------- CHECKOUT ---------- */
+	
+	// Client requested order summary
+	@GET @Path("/ordersummary")
+	@Produces(MediaType.APPLICATION_JSON)
+	public JSONObject getOrderSummary() {
+		
+		// TODO this isn't working 
+		JSONObject data = new JSONObject();
+        data.put("items", cart.getItems());
+        data.put("total", cart.getSubtotalCost());
+		
+		return data;
+	}
+	
+	// Client is trying to checkout
 	@POST
 	@Path("/checkout")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -146,6 +185,7 @@ public class ShoppingCartResource {
 		account.getOrderInfo().setBillState(billState);
 		account.getOrderInfo().setBillZip(billZip);
 		account.getOrderInfo().setBillPhone(billPhone);
+		
 		// Fill in order information - Shipping
 		account.getOrderInfo().setShipName(shipName);
 		account.getOrderInfo().setShipAddr1(shipAddr1);
@@ -155,27 +195,12 @@ public class ShoppingCartResource {
 		account.getOrderInfo().setShipZip(shipZip);
 		account.getOrderInfo().setShipPhone(shipPhone);
 		
-		
-		
 		// Redirects user to order summary page.
 		java.net.URI location;
-		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/checkout.html");
+		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/ordersummary.html");
 		System.out.println("Redirecting to " + location);
 		return Response.temporaryRedirect(location).build();
 
-	}
-	
-	
-	@POST
-	@Path("{id}")
-	public void addItemToCart(@PathParam("id") String id) {
-		cart.addItem(catalog.getItemInventory(id));
-	}
-	
-	@GET @Path("/productinfo/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Inventory getProductInfo(@PathParam("id") String id) {
-		return catalog.getItemInventory(id);
 	}
 	
 }

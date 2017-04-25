@@ -8,7 +8,7 @@ public class ApplicationConfig extends javax.ws.rs.core.Application {
         Set<Class<?>> classes = new HashSet<Class<?>>();
         
         // Update when new resource classes are made
-        classes.add(ShoppingCartResource.class);
+        classes.add(ApplicationResource.class);
         
         return classes;
     }

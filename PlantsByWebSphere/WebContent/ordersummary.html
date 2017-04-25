@@ -44,7 +44,7 @@ All Rights Reserved * Licensed Materials - Property of IBM
 
 </head>
 
-<body onload="configPage('login');">
+<body onload="configPage('ordersummary');">
 
   <!-- Navigation -->
   <nav class="navbar-custom navbar-inverse navbar-fixed-top" role="navigation">
@@ -71,7 +71,7 @@ All Rights Reserved * Licensed Materials - Property of IBM
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
+          <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
           <li><a href="shoppingcart.html"><span class="glyphicon glyphicon-shopping-cart"></span> <span id="cart">Shopping Cart is Empty</span></a></li>
         </ul>
       </div>
@@ -79,24 +79,12 @@ All Rights Reserved * Licensed Materials - Property of IBM
   </nav>
 
   <!-- Page Content -->
-  <div class="container">
-
+  <div class="container" id="summaryPage">
     <div class="row">
       <div class="col-lg-12">
-        <form name="login" class="form-signin" form action="rest/app/login" method="post">
-          <h2 class="form-signin-heading">Please sign in</h2>
-          <p id="message">Type your email and password, or create a new account</p>
-          <label for="inputEmail" class="sr-only">Email address</label>
-          <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-          <br>
-          <a href="register.html">Create Account</a>
-        </form>
+        <h1> Your order </h1>
       </div>
     </div>
-
   </div>
 
   <!-- Footer -->
@@ -112,4 +100,5 @@ All Rights Reserved * Licensed Materials - Property of IBM
   </div>
 
 </body>
+
 </html>

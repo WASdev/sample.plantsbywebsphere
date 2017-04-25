@@ -57,3 +57,7 @@ All Rights Reserved * Licensed Materials - Property of IBM
 table {
   width:100%;
 }
+
+.caption {
+  height: 150px;
+}

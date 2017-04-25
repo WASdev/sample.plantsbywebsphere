@@ -1,6 +1,6 @@
 var shoppingCartString = "Shopping Cart is Empty";
 var shoppingCartData = null;
-var rootURL = "http://localhost:9080/PlantsByWebSphere/rest";
+var rootURL = "http://localhost:9080/PlantsByWebSphere/rest/app";
 var signedIn = false;
 var priceArray = [];
 
@@ -19,6 +19,8 @@ function configPage(page) {
     configTrees();
   } else if (page === "shoppingcart") {
     requestCartItems();
+  } else if (page === "ordersummary") {
+    requestOrderSummary();
   }
   getStatus();
   getShoppingCart();
@@ -104,7 +106,7 @@ function getStatus() {
   console.log("Checking for login");
   $.ajax({
     type: 'GET',
-    url: rootURL + "/cart/status",
+    url: rootURL + "/status",
     dataType: "json",
     success: renderStatus
   });
@@ -114,7 +116,7 @@ function getStatus() {
 function renderStatus(data) {
   if(data === null) {
     console.log("Server returned null data");
-  } else if(data === "nope") {
+  } else if(data === "401") {
     console.log("User is not logged in");
   } else {
     console.log(data);
@@ -124,17 +126,19 @@ function renderStatus(data) {
 }
 
 
-/*-------------- Register ---------------- */
+/* -------------- Register ---------------- */
+
 // Get customer info
 function creatCustomer() {
 	console.log("Creating new customer");
 	$.ajax({
 		type: 'GET',
-		url: rootURL + "cart/register",
+		url: rootURL + "/register",
 		dataType: "json",
 		success: renderCustomer
 	});
 }
+
 // Create new customer
 function renderCustomer(data) {
 	console.log("Rendering new customer");
@@ -147,18 +151,38 @@ function renderCustomer(data) {
 	}
 }
 
-/*-------------- Checkout ---------------- */
-//Get checkout info
+/* -------------- Checkout ---------------- */
+
+// Do checkout
+function doCheckout() {
+  if(signedIn) {
+    console.log("user is logged in");
+    var jsonData = updateTotal();
+
+    $.ajax({
+      type: "POST",
+      url: rootURL + "/checkout",
+      dataType: "json",
+      data : jsonData,
+      success: renderProductInfo
+    });
+  } else {
+    window.location.href = "login.html";
+  }
+}
+
+// Get checkout info
 function creatOrder() {
 	console.log("Creating new checkout");
 	$.ajax({
 		type: 'GET',
-		url: rootURL + "cart/checkout",
+		url: rootURL + "/checkout",
 		dataType: "json",
 		success: renderCheckout
 	});
 }
-//Create new order
+
+// Create new order
 function renderOrder(data) {
 	console.log("Rendering new order");
 	if(data == null)
@@ -168,6 +192,59 @@ function renderOrder(data) {
 		$("#checkout").text(data);
 		$("#checkout").attr("href", "#");
 	}
+}
+
+/* -------------- Order Summary ---------------- */
+
+// Get order summary
+function requestOrderSummary() {
+  console.log("Requesting order summary");
+  $.ajax({
+    type: 'GET',
+    url: rootURL + "/ordersummary",
+    dataType: "json",
+    success: renderOrderSummary
+  });
+}
+
+// Render items for the order summary page
+function renderOrderSummary(data) {
+  if(data === null) {
+    console.log("Server returned null data");
+  } else {
+    console.log(data);
+    var htmlString = "<table class='table-striped'>" +
+    "<thead><tr><th class='col-sm-4'>Plant</th>" +
+    "<th class='col-sm-4'>Quantity</th>" +
+    "<th class='col-sm-4'>Price</th>" +
+    "</tr></thead><tbody>";
+
+    if(data === null) {
+      // handle null result
+    } else {
+      // if item list is empty, do nothing
+      if(data.items.length === 0) {
+        return;
+      } else {
+
+        // loop through list of items
+        for(var i = 0; i < data.items.length; i++) {
+
+          // add table row
+          htmlString+= "<tr><td>" + data.items[i].name + "</td>" +
+          "<td>" + data.items[i].quantity + "</td>" +
+          "<td>$" + data.items[i].price + "</td></tr>";
+        }
+
+        htmlString+= "</tbody></table><hr><div class='col-lg-8'></div>" +
+        "<div class='col-lg-4'><h5 id='total'> Total:" + data.total + "</h5></div>" +
+        "<div class='col-lg-8'></div><div class='col-lg-4'>" +
+        "<button type='button' onclick='performCheckout()'>Place order</button></div>";
+
+      }
+      $("#summaryPage").html(htmlString);
+    }
+  }
 }
 
 /* ------------ Shopping Cart ------------ */
@@ -217,12 +294,12 @@ function requestCartItems() {
     type: 'GET',
     url: rootURL + "/cart/items",
     dataType: "json",
-    success: loadCartItems
+    success: renderCartItems
   });
 }
 
 // Load items for the shopping cart page
-function loadCartItems(data) {
+function renderCartItems(data) {
   if(data === null) {
     console.log("Server returned null data");
   } else {
@@ -281,31 +358,12 @@ function updateTotal() {
 
   var jsonString = "{";
   for (var j = 0; j < shoppingCartData.length; j++) {
-    jsonString+= data[j].id + " : " + parseInt(arr[j].value) + ",";
+    jsonString+= shoppingCartData[j].id + " : " + parseInt(arr[j].value) + ",";
   }
   jsonString+= "};";
 
   $("#total").html("Total: $" + total);
-  return jsonCart;
-}
-
-/* ------------ Checkout ------------ */
-
-function doCheckout() {
-  if(signedIn) {
-    console.log("user is logged in");
-    var jsonData = updateTotal();
-
-    $.ajax({
-      type: "POST",
-      url: rootURL + "/cart/checkout",
-      dataType: "json",
-      data : jsonData,
-      success: renderProductInfo
-    });
-  } else {
-    window.location.href = "login.html";
-  }
+  return jsonString;
 }
 
 /* ------------ Product Data ------------ */
@@ -315,7 +373,7 @@ function getProductInfo(itemID) {
   console.log("Requesting product info for id: " + itemID);
   $.ajax({
     type: "GET",
-    url: rootURL + "/cart/productinfo/" + itemID,
+    url: rootURL + "/productinfo/" + itemID,
     dataType: "json",
     success: renderProductInfo
   });

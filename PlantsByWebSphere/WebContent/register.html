@@ -52,7 +52,7 @@
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+          <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login </a></li>
           <li><a href="shoppingcart.html"><span class="glyphicon glyphicon-shopping-cart"></span> <span id="cart">Shopping Cart is Empty</span></a></li>
         </ul>
       </div>
@@ -61,53 +61,68 @@
 
   <!-- Page Content -->
   <div class="container">
-
-	<form name="register" class="form-register" form action="rest/cart/register" method="post">
-      <h2 class="form-signin-heading">Please fill out the new customer registration form.</h2>
-      <p>Email:</p>
-       <label for="email" class="sr-only">Email</label>
-      <input name="email" type="email" id="email" class="form-control" placeholder="Address" required>
-      <p>Password:</p>
-       <label for="password" class="sr-only"> Password</label>
-      <input name="password" type="password" id="password" class="form-control" placeholder="Address" required>
-      <p>First Name:</p>
-      <label for="firstName" class="sr-only">First Name</label>
-      <input name="firstname" type="text" id="firstName" class="form-control" placeholder="First Name" required>
-      <p>Last Name:</p>
-      <label for="lastName" class="sr-only">Last Name</label>
-      <input name="lastname" type="text" id="lastName" class="form-control" placeholder="Last Name" required>
-      <p>Address:</p>
-       <label for="address1" class="sr-only">Address</label>
-      <input name="address1" type="text" id="address1" class="form-control" placeholder="Address" required>
-       <label for="address2" class="sr-only">Address</label>
-      <input name="address2" type="text" id="address2" class="form-control" placeholder="Address" required>
-      <p>City:</p>
-       <label for="city" class="sr-only">City</label>
-      <input name="city" type="text" id="city" class="form-control" placeholder="City" required>
-      <p>State:</p>
-       <label for="state" class="sr-only">State</label>
-      <input name="state" type="text" id="state" class="form-control" placeholder="State" required>
-      <p>Zip Code:</p>
-       <label for="zipCode" class="sr-only">Zip Code</label>
-      <input name="zipcode" type="number" id="zipCode" class="form-control" placeholder="Zip Code" required>
-      <p>Phone Number:</p>
-       <label for="phoneNum" class="sr-only">Phone Number</label>
-      <input name="phonenum" type="tel" id="phoneNum" class="form-control" placeholder="Phone Number" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
-    </form>
-    </div>     
-     
-  <!-- Footer -->
-  <div class="container">
-    <hr>
-    <footer>
-      <div class="row">
-        <div class="col-lg-12">
-          <p>Powered by IBM WebSphere</p>
-        </div>
+    <div class="row">
+      <div class="col-lg-2">
       </div>
-    </footer>
-  </div>
+      <div class="col-lg-8">
+        <form name="register" class="form-register" form action="rest/app/register" method="post">
+          <h2 class="form-signin-heading">Please fill out the new customer registration form.</h2>
+          <p>Email:</p>
+          <label for="email" class="sr-only">Email</label>
+          <input name="email" type="email" id="email" class="form-control" placeholder="Address" required>
+          <br>
+          <p>Password:</p>
+          <label for="password" class="sr-only"> Password</label>
+          <input name="password" type="password" id="password" class="form-control" placeholder="Address" required>
+          <br>
+          <p>First Name:</p>
+          <label for="firstName" class="sr-only">First Name</label>
+          <input name="firstname" type="text" id="firstName" class="form-control" placeholder="First Name" required>
+          <br>
+          <p>Last Name:</p>
+          <label for="lastName" class="sr-only">Last Name</label>
+          <input name="lastname" type="text" id="lastName" class="form-control" placeholder="Last Name" required>
+          <br>
+          <p>Address:</p>
+          <label for="address1" class="sr-only">Address</label>
+          <input name="address1" type="text" id="address1" class="form-control" placeholder="Address" required>
+          <label for="address2" class="sr-only">Address</label>
+          <input name="address2" type="text" id="address2" class="form-control" placeholder="Address" required>
+          <br>
+          <p>City:</p>
+          <label for="city" class="sr-only">City</label>
+          <input name="city" type="text" id="city" class="form-control" placeholder="City" required>
+          <br>
+          <p>State:</p>
+          <label for="state" class="sr-only">State</label>
+          <input name="state" type="text" id="state" class="form-control" placeholder="State" required>
+          <br>
+          <p>Zip Code:</p>
+          <label for="zipCode" class="sr-only">Zip Code</label>
+          <input name="zipcode" type="number" id="zipCode" class="form-control" placeholder="Zip Code" required>
+          <br>
+          <p>Phone Number:</p>
+          <label for="phoneNum" class="sr-only">Phone Number</label>
+          <input name="phonenum" type="tel" id="phoneNum" class="form-control" placeholder="Phone Number" required>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+          <br>
+        </form>
+      </div>
+      <div class="col-lg-2">
+      </div>
+    </div>
 
-</body>
-</html>
+    <!-- Footer -->
+    <div class="container">
+      <hr>
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <p>Powered by IBM WebSphere</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </body>
+  </html>
