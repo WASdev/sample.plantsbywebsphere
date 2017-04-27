@@ -1,6 +1,8 @@
 package com.ibm.websphere.samples.pbw.bean;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -13,7 +15,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.ibm.json.java.JSONArray;
 import com.ibm.json.java.JSONObject;
 import com.ibm.websphere.samples.pbw.jpa.Inventory;
 import com.ibm.websphere.samples.pbw.war.AccountBean;
@@ -34,6 +35,7 @@ public class ApplicationResource {
 	@GET @Path("/cart")
 	@Produces(MediaType.APPLICATION_JSON)
 	public int getShoppingCartSize() {
+		System.out.println("Sending shopping cart size");
 		return cart.getSize();
 	}
 	
@@ -41,6 +43,7 @@ public class ApplicationResource {
 	@POST
 	@Path("/cart/{id}")
 	public void addItemToCart(@PathParam("id") String id) {
+		System.out.println("Adding item to shopping cart with id: " + id);
 		cart.addItem(catalog.getItemInventory(id));
 	}
 	
@@ -48,13 +51,23 @@ public class ApplicationResource {
 	@GET @Path("/cart/items")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Inventory> getShoppingCartItems() {
+		System.out.println("Sending list of shopping cart items");
 		return cart.getItems();
+	}
+	
+	// Client requested sub total cost
+	@GET @Path("/cart/total")
+	@Produces(MediaType.APPLICATION_JSON)
+	public float getShoppingCartTotal() {
+		System.out.println("Sending shopping cart sub total");
+		return cart.getSubtotalCost();
 	}
 	
 	// Client requested info for a product
 	@GET @Path("/productinfo/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Inventory getProductInfo(@PathParam("id") String id) {
+		System.out.println("Sending product information for id: " + id);
 		return catalog.getItemInventory(id);
 	}
 	
@@ -65,8 +78,10 @@ public class ApplicationResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getStatus() {
 		if (account.isRegister()) {
+			System.out.println("User is logged in with name: " + account.getCustomer().getFirstName());
 			return account.getCustomer().getFirstName();
 		} else {
+			System.out.println("User is not logged in");
 			return "401";
 		}
 	}
@@ -77,7 +92,7 @@ public class ApplicationResource {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
 	public Response performLogin(@FormParam("email") String email, @FormParam("password") String password) throws URISyntaxException {
-		System.out.println("Email: " + email + ", Password: " + password);
+		System.out.println("Client is attemtpnig to log in | Email: " + email + ", Password: " + password);
 		
 		// initialize login info and set email/password
 		account.performLogin();
@@ -120,7 +135,7 @@ public class ApplicationResource {
 			@FormParam("address1") String addr1, @FormParam("address2") String addr2,  @FormParam("city") String city, 
 			@FormParam("state") String state, @FormParam("zipCode") String zipCode, @FormParam("phonenum") String phonenum) throws URISyntaxException {
 			
-		
+		System.out.println("Attempting to register a new user with email: " + email);
 		account.performRegister();
 		account.getLoginInfo().setEmail(email);
 		account.getLoginInfo().setPassword(password);
@@ -151,16 +166,44 @@ public class ApplicationResource {
 	/* ---------- CHECKOUT ---------- */
 	
 	// Client requested order summary
-	@GET @Path("/ordersummary")
+	@GET @Path("/summary")
 	@Produces(MediaType.APPLICATION_JSON)
-	public JSONObject getOrderSummary() {
-		
-		// TODO this isn't working 
-		JSONObject data = new JSONObject();
-        data.put("items", cart.getItems());
-        data.put("total", cart.getSubtotalCost());
-		
-		return data;
+	public Map<String, String> getOrderSummary() {		
+		System.out.println("Sending order summary");
+		Map<String, String> data = new HashMap<String, String>();
+		if (account.getOrderInfo() != null) {
+			data.put("ship1", account.getOrderInfo().getShipAddr1());
+			data.put("ship2", account.getOrderInfo().getShipAddr2());
+			data.put("city", account.getOrderInfo().getShipCity());
+			data.put("name", account.getOrderInfo().getShipName());
+			data.put("state", account.getOrderInfo().getShipState());
+			data.put("zip", account.getOrderInfo().getShipZip());
+			data.put("phone", account.getOrderInfo().getShipPhone());
+			return data;
+		} else {
+			return null;
+		}
+	}
+	
+	// Client requested shipping method
+	@GET @Path("/shipping")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getShippingMethod() {
+		System.out.println("Sending shipping method");
+		if (account.getOrderInfo() != null) {
+			return account.getOrderInfo().getShippingMethodName();
+		} else {
+			return null;
+		}
+	}
+	
+	// Client is updating quantity of each item before checkout
+	@POST
+	@Path("/checkout/begin")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void beginCheckout(JSONObject data) {
+		// TODO update quantity for each item
 	}
 	
 	// Client is trying to checkout
@@ -174,6 +217,8 @@ public class ApplicationResource {
 			@FormParam("cardholderName") String cardholderName, @FormParam("cardName") String cardName, @FormParam("cardNum") String cardNum, @FormParam("CardExpMonth") String cardExpMonth, 
 			@FormParam("cardExpYear") String cardExpYear) throws URISyntaxException {
 			
+		System.out.println("Attempting to checkout");
+		
 		// First create a new order.
 		account.performOrderInfo();
 		
