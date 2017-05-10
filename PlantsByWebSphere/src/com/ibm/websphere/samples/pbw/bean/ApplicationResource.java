@@ -92,7 +92,7 @@ public class ApplicationResource {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
 	public Response performLogin(@FormParam("email") String email, @FormParam("password") String password) throws URISyntaxException {
-		System.out.println("Client is attemtpnig to log in | Email: " + email + ", Password: " + password);
+		System.out.println("Client is attempting to log in with email: " + email);
 		
 		// initialize login info and set email/password
 		account.performLogin();
@@ -155,9 +155,9 @@ public class ApplicationResource {
 		// Sets the values for the new Customer.
 		account.performAccountUpdate();
 		
-		// Redirects user to checkout page.
+		// Redirects user to login page.
 		java.net.URI location;
-		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/checkout.html");
+		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/login.html");
 		System.out.println("Redirecting to " + location);
 		return Response.temporaryRedirect(location).build();
 
@@ -197,13 +197,13 @@ public class ApplicationResource {
 		}
 	}
 	
-	// Client is updating quantity of each item before checkout
+	// Client is updating quantity of items before checkout
 	@POST
 	@Path("/checkout/begin")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void beginCheckout(JSONObject data) {
-		// TODO update quantity for each item
+	public void beginCheckout(ArrayList<Inventory> data) {
+		cart.setItems(data);
 	}
 	
 	// Client is trying to checkout
@@ -246,6 +246,17 @@ public class ApplicationResource {
 		System.out.println("Redirecting to " + location);
 		return Response.temporaryRedirect(location).build();
 
+	}
+	
+	// Client is updating quantity of each item before checkout
+	@POST
+	@Path("/checkout/complete")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public int completeCheckout() throws URISyntaxException {
+		System.out.println("Finalizing order");
+		account.performCompleteCheckout();
+		return 200;
 	}
 	
 }

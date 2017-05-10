@@ -165,10 +165,13 @@ function beginCheckout() {
     url: rootURL + "/checkout/begin",
     contentType: "application/json; charset=utf-8",
     dataType: "json",
-    data : jsonData,
-    success: renderProductInfo
+    data : shoppingCartData,
+    success: continueCheckout
   });
+}
 
+// Redirect to login or checkout
+function continueCheckout(data) {
   if(signedIn) {
     window.location.href = "checkout.html";
   } else {
@@ -187,6 +190,19 @@ function creatOrder() {
 	});
 }
 
+// Copy billing info to shipping
+function fillShipping(formData) {
+  if(formData.shippingtoo.checked == true) {
+    formData.shippingname.value = formData.billingname.value;
+    formData.shippingaddr1.value = formData.billingaddr1.value;
+    formData.shippingaddr2.value = formData.billingaddr2.value;
+    formData.shippingcity.value = formData.billingcity.value;
+    formData.shippingstate.value = formData.billingstate.value;
+    formData.shippingzip.value = formData.billingzip.value;
+    formData.shippingphone.value = formData.billingphone.value;
+  }
+}
+
 // Create new order
 function renderOrder(data) {
 	console.log("Rendering new order");
@@ -197,6 +213,22 @@ function renderOrder(data) {
 		$("#checkout").text(data);
 		$("#checkout").attr("href", "#");
 	}
+}
+
+// Complete order
+function completeCheckout() {
+  console.log("Sending final order");
+  $.ajax({
+    type: 'GET',
+    url: rootURL + "/cart/items",
+    dataType: "json",
+    success: renderOrderSent
+  });
+}
+
+// Create new order
+function renderOrderSent(data) {
+	window.location.href = "ordersent.html";
 }
 
 /* -------------- Order Summary ---------------- */
@@ -415,17 +447,11 @@ function updateTotal() {
   for(var i = 0; i < arr.length; i++) {
     if(parseInt(arr[i].value)) {
       total += parseInt(arr[i].value)*priceArray[i];
+      shoppingCartData[i].quantity = parseInt(arr[i].value);
     }
   }
 
-  var jsonString = "{";
-  for (var j = 0; j < shoppingCartData.length; j++) {
-    jsonString+= shoppingCartData[j].id + " : " + parseInt(arr[j].value) + ",";
-  }
-  jsonString+= "};";
-
   $("#total").html("Total: $" + total);
-  return jsonString;
 }
 
 /* ------------ Product Data ------------ */

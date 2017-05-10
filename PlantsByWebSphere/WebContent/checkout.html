@@ -72,24 +72,24 @@
       </p>
     <p>Billing Name:</p>
     <label for="billName" class="sr-only">Billing Name</label>
-      <input type="billName" id="billName" class="form-control" placeholder="Billing Name" required>
+      <input type="billName" name="billingname" id="billName" class="form-control" placeholder="Billing Name" required>
        <p>Address:</p>
       <label for="billAddr1" class="sr-only">Address 1</label>
-      <input type="billAddr1" id="billAddr1" class="form-control" placeholder="Address 1" required>
+      <input type="billAddr1" name="billingaddr1" id="billAddr1" class="form-control" placeholder="Address 1" required>
       <label for="billAddr2" class="sr-only">Address 2</label>
-      <input type="billAddr2" id="billAddr2" class="form-control" placeholder="Address 2" required>
+      <input type="billAddr2" name="billingaddr2" id="billAddr2" class="form-control" placeholder="Address 2" required>
        <p>City:</p>
       <label for="billCity" class="sr-only">City</label>
-      <input type="billCity" id="billCity" class="form-control" placeholder="City" required>
+      <input type="billCity" name="billingcity" id="billCity" class="form-control" placeholder="City" required>
        <p>State:</p>
       <label for="billState" class="sr-only">State</label>
-      <input type="billState" id="billState" class="form-control" placeholder="State" required>
+      <input type="billState" name="billingstate" id="billState" class="form-control" placeholder="State" required>
        <p>Zip Code:</p>
       <label for="billZip" class="sr-only">Zip Code</label>
-      <input type="billZip" id="billZip" class="form-control" placeholder="Zip Code" required>
+      <input type="billZip" name="billingzip" id="billZip" class="form-control" placeholder="Zip Code" required>
       <p>Phone Number:</p>
       <label for="billPhone" class="sr-only">Phone Number</label>
-      <input type="billPhone" id="billPhone" class="form-control" placeholder="Phone Number" required>
+      <input type="billPhone" name="billingphone" id="billPhone" class="form-control" placeholder="Phone Number" required>
 
       <p>
       Shipping Information:
@@ -97,29 +97,29 @@
 
       <div class="checkbox">
         <label>
-          <input type="checkbox" value="same-as-billing"> Same As Billing
+          <input type="checkbox" name="shippingtoo" value="same-as-billing" onclick="fillShipping(this.form)"> Same As Billing
         </label>
       </div>
       <p>Shipping Name:</p>
        <label for="shipName" class="sr-only">Billing Name</label>
-      <input type="shipName" id="shipName" class="form-control" placeholder="Shipping Name" required>
+      <input type="shipName" name="shippingname" id="shipName" class="form-control" placeholder="Shipping Name" required>
        <p>Address:</p>
       <label for="shipAddr1" class="sr-only">Address 1</label>
-      <input type="shipAddr1" id="shipAddr1" class="form-control" placeholder="Address 1" required>
+      <input type="shipAddr1" name="shippingaddr1" id="shipAddr1" class="form-control" placeholder="Address 1" required>
       <label for="shipAddr2" class="sr-only">Address 2</label>
-      <input type="shipAddr2" id="shipAddr2" class="form-control" placeholder="Address 2" required>
+      <input type="shipAddr2" name="shippingaddr2" id="shipAddr2" class="form-control" placeholder="Address 2" required>
        <p>City:</p>
       <label for="shipCity" class="sr-only">City</label>
-      <input type="shipCity" id="shipCity" class="form-control" placeholder="City" required>
+      <input type="shipCity" name="shippingcity" id="shipCity" class="form-control" placeholder="City" required>
        <p>State:</p>
       <label for="shipState" class="sr-only">State</label>
-      <input type="shipState" id="shipState" class="form-control" placeholder="State" required>
+      <input type="shipState" name="shippingstate" id="shipState" class="form-control" placeholder="State" required>
        <p>Zip Code:</p>
       <label for="shipZip" class="sr-only">Zip Code</label>
-      <input type="shipZip" id="shipZip" class="form-control" placeholder="Zip Code" required>
+      <input type="shipZip" name="shippingzip" id="shipZip" class="form-control" placeholder="Zip Code" required>
       <p>Phone Number:</p>
       <label for="shipPhone" class="sr-only">Phone Number</label>
-      <input type="shipPhone" id="shipPhone" class="form-control" placeholder="Phone Number" required>
+      <input type="shipPhone" name="shippingphone" id="shipPhone" class="form-control" placeholder="Phone Number" required>
 
       <p>
       Credit Card Information:
