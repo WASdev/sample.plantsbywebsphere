@@ -6,7 +6,6 @@ var priceArray = [];
 
 // Configure page runs each time a page loads
 function configPage(page) {
-  console.log("Configuring page: " + page);
   if (page === "index") {
     configIndex();
   } else if (page === "accessories") {
@@ -33,7 +32,6 @@ function configPage(page) {
 
 // Configure the links on the index page
 function configIndex() {
-  console.log("Setting up links");
   $("#bonsaiLink").click(function(){getProductInfo("T0003");});
   $("#strawberryLink").click(function(){getProductInfo("V0006");});
   $("#tulipsLink").click(function(){getProductInfo("F0017");});
@@ -41,7 +39,6 @@ function configIndex() {
 
 // Configure the links on the accessories page
 function configAccessories() {
-  console.log("Setting up links");
   $("#birdfeederLink").click(function(){getProductInfo("A0002");});
   $("#birdhouseLink").click(function(){getProductInfo("A0003");});
   $("#bulbdiggerLink").click(function(){getProductInfo("A0001");});
@@ -57,7 +54,6 @@ function configAccessories() {
 
 // Configure the links on the flowers page
 function configFlowers() {
-  console.log("Setting up links");
   $("#africanorchidLink").click(function(){getProductInfo("F0001");});
   $("#breathflowerLink").click(function(){getProductInfo("F0002");});
   $("#blackeyedsusanLink").click(function(){getProductInfo("F0003");});
@@ -82,7 +78,6 @@ function configFlowers() {
 
 // Configure the links on the fruits page
 function configFruits() {
-  console.log("Setting up links");
   $("#cabbageLink").click(function(){getProductInfo("V0001");});
   $("#gourdsLink").click(function(){getProductInfo("V0002");});
   $("#grapesLink").click(function(){getProductInfo("V0003");});
@@ -94,7 +89,6 @@ function configFruits() {
 
 // Configure the links on the trees page
 function configTrees() {
-  console.log("Setting up links");
   $("#ashLink").click(function(){getProductInfo("T0001");});
   $("#aspenLink").click(function(){getProductInfo("T0002");});
   $("#bonsaiLink").click(function(){getProductInfo("T0003");});
@@ -106,7 +100,6 @@ function configTrees() {
 
 // Get login status
 function getStatus() {
-  console.log("Checking for login");
   $.ajax({
     type: 'GET',
     url: rootURL + "/status",
@@ -117,12 +110,7 @@ function getStatus() {
 
 // Update login status
 function renderStatus(data) {
-  if(data === null || typeof data === 'undefined') {
-    console.log("Server returned null data");
-  } else if(data == "401") {
-    console.log("User is not logged in");
-  } else {
-    console.log(data);
+  if(data !== null && typeof data !== 'undefined' && data !== "401") {
     $("#login").text(data);
     $("#login").attr("href", "#");
   }
@@ -133,7 +121,6 @@ function renderStatus(data) {
 
 // Get customer info
 function creatCustomer() {
-	console.log("Creating new customer");
 	$.ajax({
 		type: 'GET',
 		url: rootURL + "/register",
@@ -144,10 +131,7 @@ function creatCustomer() {
 
 // Create new customer
 function renderCustomer(data) {
-	if(data == null || typeof data === 'undefined')
-		console.log("Server returned null data");
-	else{
-		console.log(data);
+	if(data !== null && typeof data !== 'undefined') {
 		$("#register").text(data);
 		$("#register").attr("href", "#");
 	}
@@ -158,8 +142,6 @@ function renderCustomer(data) {
 // Begin checkout process
 function beginCheckout() {
   var jsonData = updateTotal();
-  console.log("Sending updated shopping cart");
-  console.log(jsonData);
   $.ajax({
     type: "POST",
     url: rootURL + "/checkout/begin",
@@ -181,7 +163,6 @@ function continueCheckout(data) {
 
 // Get checkout info
 function creatOrder() {
-	console.log("Creating new checkout");
 	$.ajax({
 		type: 'GET',
 		url: rootURL + "/checkout",
@@ -205,11 +186,7 @@ function fillShipping(formData) {
 
 // Create new order
 function renderOrder(data) {
-	console.log("Rendering new order");
-	if(data == null)
-		console.log("Server returned null data");
-	else{
-		console.log(data);
+	if(data !== null && typeof data !== 'undefined') {
 		$("#checkout").text(data);
 		$("#checkout").attr("href", "#");
 	}
@@ -217,7 +194,6 @@ function renderOrder(data) {
 
 // Complete order
 function completeCheckout() {
-  console.log("Sending final order");
   $.ajax({
     type: 'GET',
     url: rootURL + "/cart/items",
@@ -235,7 +211,6 @@ function renderOrderSent(data) {
 
 // Request order items for summary
 function requestOrderItems() {
-  console.log("Requesting order items");
   $.ajax({
     type: 'GET',
     url: rootURL + "/cart/items",
@@ -246,10 +221,7 @@ function requestOrderItems() {
 
 // Render items for the order summary page
 function renderOrderItems(data) {
-  if(data === null || typeof data === 'undefined') {
-    console.log("Server returned null data");
-  } else {
-    console.log(data);
+  if(data !== null && typeof data !== 'undefined') {
     var htmlString = "<table class='table-striped'>" +
     "<thead><tr><th class='col-sm-4'>Plant</th>" +
     "<th class='col-sm-4'>Quantity</th>" +
@@ -272,7 +244,6 @@ function renderOrderItems(data) {
 
 // Request order total for summary
 function requestOrderTotal() {
-  console.log("Requesting order total");
   $.ajax({
     type: 'GET',
     url: rootURL + "/cart/total",
@@ -283,10 +254,7 @@ function requestOrderTotal() {
 
 // Render total for the order summary page
 function renderOrderTotal(data) {
-  if(data === null || typeof data === 'undefined') {
-    console.log("Server returned null data");
-  } else {
-    console.log(data);
+  if(data !== null && typeof data !== 'undefined') {
     var htmlString = "<h5 id='total'> Total: $" + data + "</h5>";
     $("#orderTotal").html(htmlString);
   }
@@ -296,7 +264,6 @@ function renderOrderTotal(data) {
 
 // Request order summary
 function requestOrderSummary() {
-  console.log("Requesting order summary");
   $.ajax({
     type: 'GET',
     url: rootURL + "/summary",
@@ -307,10 +274,7 @@ function requestOrderSummary() {
 
 // Render order summary
 function renderOrderSummary(data) {
-  if(data === null || typeof data === 'undefined') {
-    console.log("Server returned null data");
-  } else {
-    console.log(data);
+  if(data !== null && typeof data !== 'undefined') {
     var htmlString = "<h5> Shipping </h5><p>" + data.name + "</p>" +
     "<p>" + data.ship1 + data.ship2 + "</p>" +
     "<p>" + data.city + ", " + data.state + " " + data.zip + "</p>"
@@ -321,7 +285,6 @@ function renderOrderSummary(data) {
 
 // Request shipping method
 function requestShippingMethod() {
-  console.log("Requesting shipping method");
   $.ajax({
     type: 'GET',
     url: rootURL + "/shipping",
@@ -332,10 +295,7 @@ function requestShippingMethod() {
 
 // Render order summary
 function renderShippingMethod(data) {
-  if(data === null || typeof data === 'undefined') {
-    console.log("Server returned null data");
-  } else {
-    console.log(data);
+  if(data !== null && typeof data !== 'undefined') {
     var htmlString = data;
     $("#shippingMethod").html(htmlString);
   }
@@ -345,7 +305,6 @@ function renderShippingMethod(data) {
 
 // Get number of items in shopping cart
 function getShoppingCart() {
-  console.log("Requesting number of items in shopping cart");
   $.ajax({
     type: 'GET',
     url: rootURL + "/cart",
@@ -356,9 +315,7 @@ function getShoppingCart() {
 
 // Update shopping cart number
 function renderShoppingCart(data) {
-  if(data === null || typeof data === 'undefined') {
-    console.log("Server returned null data");
-  } else {
+  if(data !== null && typeof data !== 'undefined') {
     if(data === 0) {
       shoppingCartString = "Shopping Cart is Empty";
     } else if(data === 1){
@@ -372,7 +329,6 @@ function renderShoppingCart(data) {
 
 // Add an item to the shopping cart
 function addItemToCart(itemID) {
-  console.log("Adding item to shopping cart with id: " + itemID);
   $.ajax({
     type: "POST",
     url: rootURL + "/cart/" + itemID,
@@ -383,7 +339,6 @@ function addItemToCart(itemID) {
 
 // Get shopping cart items
 function requestCartItems() {
-  console.log("Requesting shopping cart items");
   $.ajax({
     type: 'GET',
     url: rootURL + "/cart/items",
@@ -394,10 +349,7 @@ function requestCartItems() {
 
 // Load items for the shopping cart page
 function renderCartItems(data) {
-  if(data === null || typeof data === 'undefined') {
-    console.log("Server returned null data");
-  } else {
-    console.log(data);
+  if(data !== null && typeof data !== 'undefined') {
     shoppingCartData = data;
     var htmlString = "<table class='table-striped'>" +
     "<thead><tr><th class='col-sm-4'>Plant</th>" +
@@ -408,9 +360,7 @@ function renderCartItems(data) {
     // clear price array
     priceArray = [];
 
-    if(data === null) {
-      // handle null result
-    } else {
+    if(data !== null) {
       // if item list is empty, do nothing
       if(data.length === 0) {
         return;
@@ -458,7 +408,6 @@ function updateTotal() {
 
 // Request product information
 function getProductInfo(itemID) {
-  console.log("Requesting product info for id: " + itemID);
   $.ajax({
     type: "GET",
     url: rootURL + "/productinfo/" + itemID,
@@ -469,11 +418,7 @@ function getProductInfo(itemID) {
 
 // Load the info for selected product
 function renderProductInfo(data){
-  if(data === null || typeof data === 'undefined') {
-    console.log("Server returned null data");
-  } else {
-    console.log(data);
-
+  if(data !== null && typeof data !== 'undefined') {
     $("#product-title").html(data.name);
     $("#product-description").html(data.description);
   }

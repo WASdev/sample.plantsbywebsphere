@@ -15,7 +15,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.ibm.json.java.JSONObject;
 import com.ibm.websphere.samples.pbw.jpa.Inventory;
 import com.ibm.websphere.samples.pbw.war.AccountBean;
 
@@ -35,7 +34,6 @@ public class ApplicationResource {
 	@GET @Path("/cart")
 	@Produces(MediaType.APPLICATION_JSON)
 	public int getShoppingCartSize() {
-		System.out.println("Sending shopping cart size");
 		return cart.getSize();
 	}
 	
@@ -43,7 +41,6 @@ public class ApplicationResource {
 	@POST
 	@Path("/cart/{id}")
 	public void addItemToCart(@PathParam("id") String id) {
-		System.out.println("Adding item to shopping cart with id: " + id);
 		cart.addItem(catalog.getItemInventory(id));
 	}
 	
@@ -51,7 +48,6 @@ public class ApplicationResource {
 	@GET @Path("/cart/items")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Inventory> getShoppingCartItems() {
-		System.out.println("Sending list of shopping cart items");
 		return cart.getItems();
 	}
 	
@@ -59,7 +55,6 @@ public class ApplicationResource {
 	@GET @Path("/cart/total")
 	@Produces(MediaType.APPLICATION_JSON)
 	public float getShoppingCartTotal() {
-		System.out.println("Sending shopping cart sub total");
 		return cart.getSubtotalCost();
 	}
 	
@@ -67,7 +62,6 @@ public class ApplicationResource {
 	@GET @Path("/productinfo/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Inventory getProductInfo(@PathParam("id") String id) {
-		System.out.println("Sending product information for id: " + id);
 		return catalog.getItemInventory(id);
 	}
 	
@@ -78,10 +72,8 @@ public class ApplicationResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getStatus() {
 		if (account.isRegister()) {
-			System.out.println("User is logged in with name: " + account.getCustomer().getFirstName());
 			return account.getCustomer().getFirstName();
 		} else {
-			System.out.println("User is not logged in");
 			return "401";
 		}
 	}
@@ -92,7 +84,6 @@ public class ApplicationResource {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
 	public Response performLogin(@FormParam("email") String email, @FormParam("password") String password) throws URISyntaxException {
-		System.out.println("Client is attempting to log in with email: " + email);
 		
 		// initialize login info and set email/password
 		account.performLogin();
@@ -135,7 +126,7 @@ public class ApplicationResource {
 			@FormParam("address1") String addr1, @FormParam("address2") String addr2,  @FormParam("city") String city, 
 			@FormParam("state") String state, @FormParam("zipCode") String zipCode, @FormParam("phonenum") String phonenum) throws URISyntaxException {
 			
-		System.out.println("Attempting to register a new user with email: " + email);
+		// Create a new customer
 		account.performRegister();
 		account.getLoginInfo().setEmail(email);
 		account.getLoginInfo().setPassword(password);
@@ -158,7 +149,6 @@ public class ApplicationResource {
 		// Redirects user to login page.
 		java.net.URI location;
 		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/login.html");
-		System.out.println("Redirecting to " + location);
 		return Response.temporaryRedirect(location).build();
 
 	}
@@ -169,7 +159,6 @@ public class ApplicationResource {
 	@GET @Path("/summary")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Map<String, String> getOrderSummary() {		
-		System.out.println("Sending order summary");
 		Map<String, String> data = new HashMap<String, String>();
 		if (account.getOrderInfo() != null) {
 			data.put("ship1", account.getOrderInfo().getShipAddr1());
@@ -189,7 +178,6 @@ public class ApplicationResource {
 	@GET @Path("/shipping")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getShippingMethod() {
-		System.out.println("Sending shipping method");
 		if (account.getOrderInfo() != null) {
 			return account.getOrderInfo().getShippingMethodName();
 		} else {
@@ -216,8 +204,6 @@ public class ApplicationResource {
 			@FormParam("shipAddr2") String shipAddr2, @FormParam("shipCity") String shipCity, @FormParam("shipState") String shipState, @FormParam("shipZip") String shipZip,  @FormParam("shipPhone") String shipPhone,
 			@FormParam("cardholderName") String cardholderName, @FormParam("cardName") String cardName, @FormParam("cardNum") String cardNum, @FormParam("CardExpMonth") String cardExpMonth, 
 			@FormParam("cardExpYear") String cardExpYear) throws URISyntaxException {
-			
-		System.out.println("Attempting to checkout");
 		
 		// First create a new order.
 		account.performOrderInfo();
@@ -243,7 +229,6 @@ public class ApplicationResource {
 		// Redirects user to order summary page.
 		java.net.URI location;
 		location = new java.net.URI("http://localhost:9080/PlantsByWebSphere/ordersummary.html");
-		System.out.println("Redirecting to " + location);
 		return Response.temporaryRedirect(location).build();
 
 	}
@@ -254,7 +239,6 @@ public class ApplicationResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public int completeCheckout() throws URISyntaxException {
-		System.out.println("Finalizing order");
 		account.performCompleteCheckout();
 		return 200;
 	}
