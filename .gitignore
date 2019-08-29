@@ -39,3 +39,12 @@ RemoteSystemsTempFiles
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+/.apt_generated/
+/target/
+.settings/
+/.gradle/
+/build/
+bin/
+.classpath
+.project
