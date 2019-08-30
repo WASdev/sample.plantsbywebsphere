@@ -19,6 +19,7 @@ package com.ibm.websphere.samples.pbw.war;
 
 import java.io.Serializable;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 

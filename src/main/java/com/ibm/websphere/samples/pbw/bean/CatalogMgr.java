@@ -26,6 +26,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.ibm.websphere.samples.pbw.jpa.Inventory;
+import com.ibm.websphere.samples.pbw.utils.Util;
 
 /**
  * The CatalogMgr provides transactional access to the catalog of items the store is willing to sell
@@ -90,6 +91,7 @@ public class CatalogMgr implements Serializable {
 	 */
 	public Inventory getItemInventory(String inventoryID) {
 		Inventory si = null;
+		Util.debug("getItemInventory id=" + inventoryID);
 		si = em.find(Inventory.class, inventoryID);
 		return si;
 	}
@@ -103,7 +105,9 @@ public class CatalogMgr implements Serializable {
 	 */
 	public boolean addItem(Inventory item) {
 		boolean retval = true;
+		Util.debug("addItem " + item.getInventoryId());
 		em.persist(item);
+		em.flush();
 		return retval;
 	}
 
@@ -193,7 +197,7 @@ public class CatalogMgr implements Serializable {
 	private Inventory getInvUpdate(String inventoryID) {
 		Inventory inv = null;
 		inv = em.find(Inventory.class, inventoryID);
-		em.lock(inv, LockModeType.WRITE);
+		em.lock(inv, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
 		em.refresh(inv);
 		return inv;
 	}

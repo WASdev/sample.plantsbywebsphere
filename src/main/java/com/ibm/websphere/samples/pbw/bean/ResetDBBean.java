@@ -25,13 +25,23 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.Vector;
 
+import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
+import javax.persistence.SynchronizationType;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.Transactional;
+import javax.transaction.UserTransaction;
 
 import com.ibm.websphere.samples.pbw.jpa.Inventory;
 import com.ibm.websphere.samples.pbw.utils.Util;
@@ -59,7 +69,10 @@ public class ResetDBBean implements Serializable {
 
 	@PersistenceContext(unitName = "PBW")
 	EntityManager em;
-
+	
+	@Resource
+	UserTransaction tx;
+	
 	public void resetDB() {
 		deleteAll();
 		populateDB();
@@ -132,6 +145,7 @@ public class ResetDBBean implements Serializable {
 			Util.debug("INVENTORY table populated with text...");
 		} catch (Exception e) {
 			Util.debug("Unable to populate INVENTORY table with text data: " + e);
+			e.printStackTrace();
 		}
 		/**
 		 * Populate CUSTOMER table with text
@@ -167,6 +181,7 @@ public class ResetDBBean implements Serializable {
 			}
 		} catch (Exception e) {
 			Util.debug("Unable to populate CUSTOMER table with text data: " + e);
+			e.printStackTrace();
 		}
 		/**
 		 * Populate ORDER table with text
@@ -236,6 +251,7 @@ public class ResetDBBean implements Serializable {
 		} catch (Exception e) {
 			Util.debug("Unable to populate ORDERITEM table with text data: " + e);
 			e.printStackTrace();
+			e.printStackTrace();
 		}
 		/**
 		 * Populate BACKORDER table with text
@@ -258,6 +274,7 @@ public class ResetDBBean implements Serializable {
 			}
 		} catch (Exception e) {
 			Util.debug("Unable to populate BACKORDER table with text data: " + e);
+			e.printStackTrace();
 		}
 		/**
 		 * Populate SUPPLIER table with text
@@ -290,9 +307,11 @@ public class ResetDBBean implements Serializable {
 			}
 		} catch (Exception e) {
 			Util.debug("Unable to populate SUPPLIER table with text data: " + e);
+			e.printStackTrace();
 		}
 	}
 
+	@Transactional
 	public void deleteAll() {
 		try {
 			Query q = em.createNamedQuery("removeAllOrders");
@@ -310,9 +329,14 @@ public class ResetDBBean implements Serializable {
 			q = em.createNamedQuery("removeAllSupplier");
 			q.executeUpdate();
 			em.flush();
+			Util.debug("Deleted all data from database");
 		} catch (Exception e) {
 			Util.debug("ResetDB(deleteAll) -- Error deleting data from the database: " + e);
 			e.printStackTrace();
+			try {
+                tx.setRollbackOnly();
+            } catch (IllegalStateException | SystemException ignore) {
+            }
 		}
 	}
 

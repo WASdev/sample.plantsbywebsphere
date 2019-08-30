@@ -20,6 +20,7 @@ package com.ibm.websphere.samples.pbw.war;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 import com.ibm.websphere.samples.pbw.jpa.Inventory;
 import com.ibm.websphere.samples.pbw.utils.Util;
@@ -34,6 +35,7 @@ public class ProductBean implements Serializable {
 	private int quantity;
 
 	protected ProductBean(Inventory inventory) {
+	    Objects.requireNonNull(inventory, "Inventory cannot be null");
 		this.inventory = inventory;
 		this.quantity = 1;
 	}

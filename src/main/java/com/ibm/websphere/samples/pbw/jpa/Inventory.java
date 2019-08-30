@@ -22,6 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 import com.ibm.websphere.samples.pbw.utils.Util;
 
@@ -57,6 +58,9 @@ public class Inventory implements Cloneable, java.io.Serializable {
 	private boolean isPublic;
 	private int minThreshold;
 	private int maxThreshold;
+	
+	@Version
+	private long version;
 
 	@Transient
 	private BackOrder backOrder;
@@ -298,6 +302,11 @@ public class Inventory implements Cloneable, java.io.Serializable {
 
 	public void setBackOrder(BackOrder backOrder) {
 		this.backOrder = backOrder;
+	}
+	
+	@Override
+	public String toString() {
+	    return getClass().getSimpleName() + "{id=" + inventoryId + "}";
 	}
 
 }
