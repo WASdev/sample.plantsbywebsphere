@@ -4,11 +4,19 @@ Updated Plants By WebSphere showcase sample to run on WebSphere Liberty.
 This Repository is for testing the PlantsByWebSphere application
 in an open source development environment.
 
+## How to run:
+
+1. Clone the github repo
+2. Start the Liberty server and open the application in a web browser by running: 
+```
+./gradlew start open
+```
+
 ### Collaborators:
-Dalia A. Abo Sheasha
-Ryan Gallus
-Samuel Ivanecky
-Alex Mortimer
+- Dalia A. Abo Sheasha
+- Ryan Gallus
+- Samuel Ivanecky
+- Alex Mortimer
 
 ### Overview
 This repository contains the PlantsByWebSphere Java EE sample application. There are two versions of the sample application. The master branch contains the original version of PlantsByWebSphere, while the rest branch contains an updated version which is still under development.
