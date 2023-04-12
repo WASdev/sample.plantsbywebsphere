@@ -19,7 +19,7 @@ in an open source development environment.
 - Alex Mortimer
 
 ### Overview
-This repository contains the PlantsByWebSphere Java EE sample application. There are two versions of the sample application. The master branch contains the original version of PlantsByWebSphere, while the rest branch contains an updated version which is still under development.
+This repository contains the PlantsByWebSphere Java EE sample application. There are two versions of the sample application. The main branch contains the original version of PlantsByWebSphere, while the rest branch contains an updated version which is still under development.
 
 ### Original
 The original version of PlantsByWebSphere is a simple Java EE application which uses CDI managed beans, Java Server Faces (JSF), and Java Server Pages (JSP). The sample runs on both TWAS and Liberty.

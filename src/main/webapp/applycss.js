@@ -20,8 +20,8 @@ var i = navigator.appVersion.indexOf('MSIE 6');
 if ((navigator.appName == "Microsoft Internet Explorer")
 		&& (parseInt(navigator.appVersion) >= 4)) {
 	document
-			.write('<link rel="stylesheet" href="resources/theme/PlantMaster.css" type="text/css"/>');
+			.write('<link rel="stylesheet" href="resources/theme/PlantMain.css" type="text/css"/>');
 } else {
 	document
-			.write('<link rel="stylesheet" href="resources/theme/PlantMaster_ns.css" type="text/css"/>');
+			.write('<link rel="stylesheet" href="resources/theme/PlantMain_ns.css" type="text/css"/>');
 }
