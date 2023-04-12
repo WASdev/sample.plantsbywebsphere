@@ -24,7 +24,7 @@ All Rights Reserved * Licensed Materials - Property of IBM
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="GENERATOR" content="IBM WebSphere Studio">
 <meta http-equiv="Content-Style-Type" content="text/css">
-<link href="/PlantsByWebSphere/PlantMaster.css" rel="stylesheet"
+<link href="/PlantsByWebSphere/PlantMain.css" rel="stylesheet"
 	type="text/css">
 <title>backorderadmin.jsp</title>
 
