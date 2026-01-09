@@ -36,5 +36,9 @@
         <jdbcDriver libraryRef="DerbyLib"/>
         <properties.derby.embedded createDatabase="create" databaseName="memory:PLANTSDB"/>
     </dataSource>
-    
+    <application id="PlantsByWebSphere"
+                 location="PlantsByWebSphere.war"
+                 name="PlantsByWebSphere"
+                 type="war">
+    </application>
 </server>
