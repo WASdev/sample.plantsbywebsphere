@@ -5,8 +5,8 @@ group = 'net.wasdev.sample'
 version = '1.0-SNAPSHOT'
 description = "PlantsByWebSphere"
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
