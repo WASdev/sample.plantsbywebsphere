@@ -1,10 +1,12 @@
 <server>
     <!-- Enable features -->
     <featureManager>
-        <feature>javaee-7.0</feature>
+        <feature>javaee-8.0</feature>
         <feature>localConnector-1.0</feature>
     </featureManager>
-    
+    <library id="global">
+        <fileset dir="${server.config.dir}/lib/" includes="xalan-*.jar,serializer-*.jar"/>
+    </library>
     <keyStore id="defaultKeyStore" password="liberty"/>
     <!--For a user registry configuration, configure your user registry. For example, configure a basic user registry using the
         basicRegistry element. Specify your own user name below in the name attribute of the user element. For the password, 
@@ -34,6 +36,9 @@
         <jdbcDriver libraryRef="DerbyLib"/>
         <properties.derby.embedded createDatabase="create" databaseName="memory:PLANTSDB"/>
     </dataSource>
-    
+    <application id="PlantsByWebSphere"
+                 location="PlantsByWebSphere.war"
+                 name="PlantsByWebSphere"
+                 type="war">
+    </application>
 </server>
-
