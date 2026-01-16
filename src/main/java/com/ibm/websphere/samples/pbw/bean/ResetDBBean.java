@@ -259,6 +259,15 @@ public class ResetDBBean implements Serializable {
 		Util.debug("Populating BACKORDER table with default values...");
 		try {
 			String[] values = Util.getProperties("backorder");
+			if (values != null && values.length != 0) {
+				if (values[0] == null || values[0].isEmpty()) {
+					Util.debug("No BACKORDER properties found.");
+					return;
+				}
+			} else if (values == null || values.length == 0) {
+				Util.debug("No BACKORDER properties found.");
+				return;
+			}
 			Util.debug("Found BACKORDER properties:  " + values[0]);
 			// Inserting backorders
 			for (int index = 0; index < values.length; index++) {
