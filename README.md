@@ -1,5 +1,5 @@
 # sample.plantsbywebsphere
-Updated Plants By WebSphere showcase sample to run on WebSphere Liberty.
+Updated Plants By WebSphere showcase sample to run on Open Liberty.
 
 This Repository is for testing the PlantsByWebSphere application
 in an open source development environment.
@@ -22,7 +22,7 @@ in an open source development environment.
 This repository contains the PlantsByWebSphere Java EE sample application. There are two versions of the sample application. The main branch contains the original version of PlantsByWebSphere, while the rest branch contains an updated version which is still under development.
 
 ### Original
-The original version of PlantsByWebSphere is a simple Java EE application which uses CDI managed beans, Java Server Faces (JSF), and Java Server Pages (JSP). The sample runs on both TWAS and Liberty.
+The original version of PlantsByWebSphere is a simple Java EE application which uses CDI managed beans, Java Server Faces (JSF), and Java Server Pages (JSP). The sample can run on both TWAS and Liberty (requires changing the libertyRuntime to 'com.ibm.websphere.appserver.runtime:wlp-javaee7:19.0.0.8').
 
 ### Updated
 The updated version of PlantsByWebSphere replaces components of the original with a more modern web application design. JSF and JSP have been replaced by JAX-RS with the application redesigned as a RESTful Web Service. The client is a simple bootstrap framework, and all client JavaScript can be found in application.js. The server's additional REST code can be found in ApplicationResource.java.

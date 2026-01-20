@@ -30,8 +30,10 @@ configurations {
 
 dependencies {
 	providedCompile 'javax:javaee-api:7.0'
+	compile 'xalan:xalan:2.7.2'
+	compile 'xalan:serializer:2.7.2'
 	serverLibs  'org.apache.derby:derby:10.11.1.1'
-	libertyRuntime 'com.ibm.websphere.appserver.runtime:wlp-javaee7:19.0.0.8'
+	libertyRuntime 'io.openliberty:openliberty-runtime:18.0.0.2'
 }
 
 task copyServerLibs(type: Copy) {
