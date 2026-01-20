@@ -7,7 +7,7 @@ in an open source development environment.
 ## How to run:
 
 1. Clone the github repo
-2. Start the Open Liberty server and open the application in a web browser by running: 
+2. Start the Liberty server and open the application in a web browser by running: 
 ```
 ./gradlew start open
 ```
