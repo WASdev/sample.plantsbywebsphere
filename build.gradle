@@ -5,8 +5,8 @@ group = 'net.wasdev.sample'
 version = '1.0-SNAPSHOT'
 description = "PlantsByWebSphere"
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -31,6 +31,8 @@ configurations {
 dependencies {
 	providedCompile 'javax:javaee-api:7.0'
 	serverLibs  'org.apache.derby:derby:10.11.1.1'
+    compile 'xalan:xalan:2.7.2'
+	compile 'xalan:serializer:2.7.2'
 	libertyRuntime 'com.ibm.websphere.appserver.runtime:wlp-javaee7:19.0.0.8'
 }
 
