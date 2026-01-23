@@ -21,7 +21,7 @@
                   
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>
-
+    <logging hideMessage="SRVE9967W" />
     <variable name="WAS_INSTALL_ROOT" value="${server.config.dir}"/>
     <variable name="DERBY_JDBC_DRIVER_PATH" value="${server.config.dir}/lib"/>
     <library id="DerbyLib">
