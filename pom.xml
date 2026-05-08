@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Project Coordinates (matches build.gradle lines 4-6) -->
+    <groupId>net.wasdev.sample</groupId>
+    <artifactId>PlantsByWebSphere</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>PlantsByWebSphere</name>
+    <description>PlantsByWebSphere Sample Application</description>
+
+    <!-- Build Properties (matches build.gradle lines 8-12) -->
+    <properties>
+        <!-- Java Version -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        
+        <!-- Encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        
+        <!-- Liberty Server Configuration -->
+        <liberty.var.default.http.port>9080</liberty.var.default.http.port>
+        <liberty.var.default.https.port>9443</liberty.var.default.https.port>
+        
+        <!-- Plugin Versions -->
+        <version.liberty-maven-plugin>3.10</version.liberty-maven-plugin>
+        <version.maven-compiler-plugin>3.11.0</version.maven-compiler-plugin>
+        <version.maven-war-plugin>3.4.0</version.maven-war-plugin>
+        <version.maven-dependency-plugin>3.6.1</version.maven-dependency-plugin>
+    </properties>
+
+    <!-- Dependencies (matches build.gradle lines 31-37) -->
+    <dependencies>
+        <!-- Java EE 7 API (providedCompile in Gradle) -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Apache Derby Database (serverLibs in Gradle) -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.11.1.1</version>
+        </dependency>
+
+        <!-- Xalan XML Processor (compile in Gradle) -->
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>xalan</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>xalan</groupId>
+            <artifactId>serializer</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- WAR file name (matches build.gradle line 45) -->
+        <finalName>PlantsByWebSphere</finalName>
+
+        <plugins>
+            <!-- Maven Compiler Plugin (matches build.gradle lines 8-12) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.maven-compiler-plugin}</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- Maven WAR Plugin (matches build.gradle line 1: apply plugin: 'war') -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.maven-war-plugin}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <packagingExcludes>pom.xml</packagingExcludes>
+                </configuration>
+            </plugin>
+
+            <!-- Liberty Maven Plugin (matches build.gradle lines 64-71) -->
+            <plugin>
+                <groupId>io.openliberty.tools</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>${version.liberty-maven-plugin}</version>
+                <configuration>
+                    <!-- Server name (matches rootProject.name + 'Server') -->
+                    <serverName>PlantsByWebSphereServer</serverName>
+                    
+                    <!-- Liberty config directory (matches build.gradle line 69) -->
+                    <configDirectory>${project.basedir}/src/main/liberty/config</configDirectory>
+                    
+                    <!-- Loose application setting (matches build.gradle line 68) -->
+                    <looseApplication>false</looseApplication>
+                    
+                    <!-- Strip version from WAR name -->
+                    <stripVersion>true</stripVersion>
+                    
+                    <!-- Install application packages -->
+                    <installAppPackages>project</installAppPackages>
+                    
+                    <!-- Bootstrap properties -->
+                    <bootstrapProperties>
+                        <default.http.port>${liberty.var.default.http.port}</default.http.port>
+                        <default.https.port>${liberty.var.default.https.port}</default.https.port>
+                        <app.context.root>/PlantsByWebSphere</app.context.root>
+                    </bootstrapProperties>
+                </configuration>
+                <executions>
+                    <!-- Create Liberty server -->
+                    <execution>
+                        <id>create-server</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                    
+                    <!-- Install Liberty features -->
+                    <execution>
+                        <id>install-feature</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>install-feature</goal>
+                        </goals>
+                    </execution>
+                    
+                    <!-- Deploy application -->
+                    <execution>
+                        <id>deploy-app</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven Dependency Plugin (matches build.gradle lines 39-43: copyServerLibs task) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${version.maven-dependency-plugin}</version>
+                <executions>
+                    <!-- Copy Derby JAR to Liberty server lib directory -->
+                    <execution>
+                        <id>copy-server-libs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Only copy Derby (matches configurations.serverLibs) -->
+                            <includeArtifactIds>derby</includeArtifactIds>
+                            
+                            <!-- Output to Liberty server lib directory -->
+                            <outputDirectory>${project.build.directory}/liberty/wlp/usr/servers/PlantsByWebSphereServer/lib</outputDirectory>
+                            
+                            <!-- Don't include transitive dependencies -->
+                            <excludeTransitive>false</excludeTransitive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- Repositories (matches build.gradle lines 23-25) -->
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Maven Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>
+
+<!-- Made with Bob -->

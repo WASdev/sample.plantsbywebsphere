@@ -6,11 +6,39 @@ in an open source development environment.
 
 ## How to run:
 
+### Maven
+
+1. Clone the github repo
+2. Build and start the Liberty server:
+```bash
+mvn clean package liberty:start
+```
+3. Open your browser to: http://localhost:9080/PlantsByWebSphere/
+
+To stop the server:
+```bash
+mvn liberty:stop
+```
+
+### Gradle
+
 1. Clone the github repo
 2. Start the Liberty server and open the application in a web browser by running: 
 ```
 ./gradlew start open
 ```
+
+### Build Commands Reference
+
+| Task | Maven | Gradle |
+|------|--------|-------|
+| Clean build | `mvn clean package` | `./gradlew clean build` |
+| Start server | `mvn liberty:start` | `./gradlew start` |
+| Stop server | `mvn liberty:stop` | `./gradlew stop` |
+| Run server (foreground) | `mvn liberty:run` | `./gradlew libertyRun` |
+| Run tests | `mvn test` | `./gradlew test` |
+| Package WAR | `mvn package`| `./gradlew war` |
+
 
 ### Collaborators:
 - Dalia A. Abo Sheasha
