@@ -28,8 +28,11 @@
         <liberty.var.default.http.port>9080</liberty.var.default.http.port>
         <liberty.var.default.https.port>9443</liberty.var.default.https.port>
         
+        <!-- WebSphere Liberty Runtime (matches build.gradle line 36: libertyRuntime) -->
+        <liberty.runtime.version>19.0.0.8</liberty.runtime.version>
+        
         <!-- Plugin Versions -->
-        <version.liberty-maven-plugin>3.10</version.liberty-maven-plugin>
+        <version.liberty-maven-plugin>3.12.0</version.liberty-maven-plugin>
         <version.maven-compiler-plugin>3.11.0</version.maven-compiler-plugin>
         <version.maven-war-plugin>3.4.0</version.maven-war-plugin>
         <version.maven-dependency-plugin>3.6.1</version.maven-dependency-plugin>
@@ -114,6 +117,14 @@
                     
                     <!-- Install application packages -->
                     <installAppPackages>project</installAppPackages>
+                    
+                    <!-- WebSphere Liberty Runtime -->
+                    <runtimeArtifact>
+                        <groupId>com.ibm.websphere.appserver.runtime</groupId>
+                        <artifactId>wlp-javaee7</artifactId>
+                        <version>${liberty.runtime.version}</version>
+                        <type>zip</type>
+                    </runtimeArtifact>
                     
                     <!-- Bootstrap properties -->
                     <bootstrapProperties>
