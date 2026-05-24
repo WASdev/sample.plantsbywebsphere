@@ -23,7 +23,11 @@ mvn liberty:stop
 ### Gradle
 
 1. Clone the github repo
-2. Start the Liberty server and open the application in a web browser by running: 
+2. Set the relevant environment variables such as the JAVA_HOME environment variable. Ensure that you are using Java 8. For example, you may choose to download Java 8 from [IBM Semeru Runtimes Downloads](https://developer.ibm.com/languages/java/semeru-runtimes/downloads/?license=IBM).
+```
+export JAVA_HOME=<your Java 8 home path>
+```
+3. Start the Liberty server and open the application in a web browser by running: 
 ```
 ./gradlew start open
 ```
